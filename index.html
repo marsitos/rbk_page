@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Cocolón ♡</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+<body>
+
+    <!-- CAPAS DE AMBIENTE -->
+    <div class="ambient-particles" aria-hidden="true">
+        <div class="particle-layer particle-layer-1"></div>
+        <div class="particle-layer particle-layer-2"></div>
+    </div>
+    <div class="ambient-stars" aria-hidden="true" id="ambientStars"></div>
+    <div class="grain-overlay" aria-hidden="true"></div>
+    <div class="scroll-progress" aria-hidden="true" id="scrollProgress">
+        <div class="scroll-progress-track">
+            <div class="scroll-progress-fill" id="scrollProgressFill"></div>
+        </div>
+    </div>
+    <div class="hearts-burst" aria-hidden="true" id="heartsBurst"></div>
+
+
+    <!-- INTRO -->
+    <main class="intro">
+        <div class="intro-background"></div>
+        <div class="intro-content">
+            <span class="intro-small">
+                PARA TI
+            </span>
+            <h1>
+                Cocolón
+            </h1>
+            <p>
+                Una pequeña parte de lo que significas para mí.
+            </p>
+            <button id="startButton" class="start-button">
+                Descubrir
+                <span>↓</span>
+            </button>
+        </div>
+    </main>
+
+    <!-- CONTENIDO PRINCIPAL-->
+    <div id="mainContent" class="main-content">
+
+        <!--SECCIÓN: TRES MESES -->
+        <section class="months-section reveal">
+            <div class="months-glow"></div>
+            
+            <div class="months-content">
+                <span class="section-label">
+                    desde el 13 · 05 · 2026
+                </span>
+                <div class="counter-grid" id="counterGrid">
+                    <div class="counter-item">
+                        <span class="counter-value" id="cYears">00</span>
+                        <span class="counter-label">años</span>
+                    </div>
+                    <div class="counter-item">
+                        <span class="counter-value" id="cMonths">00</span>
+                        <span class="counter-label">meses</span>
+                    </div>
+                    <div class="counter-item">
+                        <span class="counter-value" id="cWeeks">00</span>
+                        <span class="counter-label">semanas</span>
+                    </div>
+                    <div class="counter-item">
+                        <span class="counter-value" id="cDays">00</span>
+                        <span class="counter-label">días</span>
+                    </div>
+                    <div class="counter-item">
+                        <span class="counter-value" id="cHours">00</span>
+                        <span class="counter-label">horas</span>
+                    </div>
+                    <div class="counter-item">
+                        <span class="counter-value" id="cMinutes">00</span>
+                        <span class="counter-label">min</span>
+                    </div>
+                    <div class="counter-item">
+                        <span class="counter-value" id="cSeconds">00</span>
+                        <span class="counter-label">seg</span>
+                    </div>
+                </div>
+                <h2>
+                    contando cada segundo
+                </h2>
+                <p class="months-intro">
+                    que poco a poco dejaron de sentirse
+                    como poco tiempo.
+                </p>
+                <div class="months-line"></div>
+                <p class="months-text">
+                    Desde ese 13 de mayo, entre salir, hablar, reírnos,
+                    conocernos un poco más cada vez
+                    y aprender a acostumbrarnos
+                    a tenernos cerca.
+                </p>
+            </div>
+        </section>
+
+        <!-- SIGUIENTE SECCIÓN -->
+        <section class="together-section reveal">
+            
+            <div class="together-content">
+                <span class="section-label">
+                    Y quizás...
+                </span>
+                <h2>
+                    eso es lo bonito.
+                </h2>
+                <p>
+                    No hemos tenido que descubrirlo
+                    todo de golpe.
+                </p>
+                <p>
+                    Simplemente hemos ido encontrándonos
+                    un poquito más cada día.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: DIFERENTES -->
+        <section class="different-section reveal">
+            
+            <div class="different-content">
+                <span class="section-label">
+                    Tú + Yo
+                </span>
+                <div class="orbits">
+                    <div class="orbit orbit-you">
+                        <span></span>
+                    </div>
+                    <div class="orbit orbit-her">
+                        <span></span>
+                    </div>
+                </div>
+                <h2>
+                    Distintos<br>
+                    Pero nosotros.
+                </h2>
+                <div class="different-text">
+                    <p>
+                        No tenemos que tener los mismos gustos
+                        para disfrutar estar juntos.
+                    </p>
+                    <p>
+                        Tú tienes tus cosas.
+                        Yo tengo las mías.
+                    </p>
+                    <p>
+                        Y de alguna manera,
+                        encontramos la forma de complementarnos.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: PRIMERA VEZ -->
+        <section class="first-section reveal">
+            
+            <div class="first-glow"></div>
+            <div class="first-content">
+                <span class="section-label">
+                    Nunca antes
+                </span>
+                <h2>
+                    Contigo,<br>
+                    todo es nuevo.
+                </h2>
+                <div class="first-text">
+                    <p>
+                        Sé que esto es distinto para ti.
+                        Que cada paso que damos,
+                        lo estás dando por primera vez.
+                    </p>
+                    <p>
+                        No quiero que sientas prisa por nada.
+                        Solo quiero que sientas que estás segura,
+                        que puedes ir a tu ritmo,
+                    </p>
+                    <p class="first-highlight">
+                        y que yo voy a estar aquí,
+                        aprendiendo contigo.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: VOZ / FORMA DE SER -->
+        <section class="voice-section reveal">
+            
+            <div class="voice-content">
+                <span class="section-label">
+                    Últimamente
+                </span>
+                <h2>
+                    Me hablas como niña pequeña,<br>
+                    y no sabes cuánto me gusta.
+                </h2>
+                <div class="voice-line"></div>
+                <div class="voice-text">
+                    <p>
+                        Dices que te tengo engreída.
+                        Yo digo que simplemente encontré
+                        a alguien a quien vale la pena consentir.
+                    </p>
+                    <p>
+                        Tímida al principio,
+                        graciosa sin darte cuenta,
+                        y capaz de adaptarte
+                        a cualquier cosa que se nos cruce.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: 18 DE JULIO -->
+        <section class="date-section reveal">
+            
+            <div class="date-glow"></div>
+            <div class="date-content">
+                <span class="section-label">
+                    18 · 07 · 2026
+                </span>
+                <h2>
+                    El día más bonito,<br>
+                    hasta ahora.
+                </h2>
+                <div class="date-line"></div>
+                <p class="date-text">
+                    No hace falta un motivo grande
+                    para que un día se quede guardado.
+                    Ese, sin planearlo, se volvió uno
+                    de los que más quiero recordar contigo.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: TULIPANES -->
+        <section class="flowers-section reveal">
+
+            <div class="petals-container" id="petalsContainer" aria-hidden="true"></div>
+            <div class="flowers-content">
+                <span class="section-label">
+                    Para ti, cocolón
+                </span>
+                <div class="tulip-wrap">
+                    <svg class="tulip-svg" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="petalGradL" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#C4B5FD"/>
+                                <stop offset="100%" stop-color="#7C3AED"/>
+                            </linearGradient>
+                            <linearGradient id="petalGradR" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#FCD34D"/>
+                                <stop offset="100%" stop-color="#F59E0B"/>
+                            </linearGradient>
+                            <linearGradient id="petalGradC" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#F8F5FC"/>
+                                <stop offset="100%" stop-color="#C4B5FD"/>
+                            </linearGradient>
+                        </defs>
+                        <path class="tulip-stem" d="M100 140 C 95 175, 95 205, 100 232" stroke="#7C3AED" stroke-width="3" fill="none" stroke-linecap="round"/>
+                        <path class="tulip-leaf tulip-leaf-l" d="M100 175 C 70 172, 50 155, 42 128 C 72 130, 92 148, 100 175 Z" fill="#7C3AED" opacity=".55"/>
+                        <path class="tulip-leaf tulip-leaf-r" d="M100 195 C 130 190, 150 172, 158 150 C 128 152, 108 170, 100 195 Z" fill="#F59E0B" opacity=".4"/>
+                        <g class="tulip-petal tulip-petal-l">
+                            <path d="M100 145 C 60 145, 55 90, 85 55 C 100 90, 100 120, 100 145 Z" fill="url(#petalGradL)"/>
+                        </g>
+                        <g class="tulip-petal tulip-petal-r">
+                            <path d="M100 145 C 140 145, 145 90, 115 55 C 100 90, 100 120, 100 145 Z" fill="url(#petalGradR)"/>
+                        </g>
+                        <g class="tulip-petal tulip-petal-c">
+                            <path d="M100 145 C 78 145, 72 80, 100 40 C 128 80, 122 145, 100 145 Z" fill="url(#petalGradC)"/>
+                        </g>
+                    </svg>
+                </div>
+                <h2>
+                    Tulipanes,<br>
+                    hechos por estas manos.
+                </h2>
+                <p class="flowers-text">
+                    Sé que te gustan las flores de todo tipo.
+                    Pero estos los hice yo, pensando en ti,
+                    para que cada pétalo tenga
+                    un poco de lo que siento.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: GALERÍA -->
+        <section class="gallery-section reveal">
+            
+            <div class="gallery-content">
+                <span class="section-label">
+                    Nosotros
+                </span>
+                <h2>
+                    Un poco de lo que<br>
+                    hemos vivido.
+                </h2>
+                <div class="gallery-grid">
+                    <!--
+                        Reemplaza cada .gallery-item por una imagen real así:
+                        <div class="gallery-item">
+                            <img src="img/playa.jpg" alt="La playa">
+                        </div>
+                        Puedes agregar o quitar cuadros libremente.
+                    -->
+                    <div class="gallery-item gallery-item-lg">
+                        <span class="gallery-caption">La playa</span>
+                    </div>
+                    <div class="gallery-item">
+                        <span class="gallery-caption">Una salida cualquiera</span>
+                    </div>
+                    <div class="gallery-item">
+                        <span class="gallery-caption">Nosotros, riendo</span>
+                    </div>
+                    <div class="gallery-item">
+                        <span class="gallery-caption">18 de julio</span>
+                    </div>
+                    <div class="gallery-item gallery-item-lg">
+                        <span class="gallery-caption">Estos tres meses</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN: CIERRE / CUMPLEAÑOS -->
+        <section class="closing-section reveal">
+            
+            <div class="closing-glow"></div>
+            <div class="closing-content">
+                <span class="section-label">
+                    25 · 08
+                </span>
+                <h2 class="closing-title">
+                    Feliz cumpleaños,<br>Cocolón.
+                </h2>
+                <div class="closing-line"></div>
+                <p class="closing-text">
+                    Quiero que este día se sienta
+                    tan especial como te sientes tú para mí.
+                </p>
+                <p class="closing-text">
+                    Gracias por dejarme ser parte de tus primeras veces,
+                    por tu risa, por adaptarte a mí sin dejar de ser tú.
+                </p>
+                <p class="closing-signature">
+                    Te quiero, te cuido,
+                    y quiero seguir descubriendo contigo
+                    todo lo que viene.
+                </p>
+                <div class="puzzle-trigger">
+                    <button
+                        type="button"
+                        id="puzzleToggle"
+                        class="puzzle-toggle"
+                        aria-expanded="false"
+                        aria-controls="puzzlePanel">
+                        <span class="puzzle-toggle-icon">✧</span>
+                        tengo un código para ti
+                    </button>
+                    <div class="puzzle-panel" id="puzzlePanel" aria-hidden="true">
+                        <form id="puzzleForm" autocomplete="off">
+                            <input
+                                type="text"
+                                id="puzzleInput"
+                                class="puzzle-input"
+                                placeholder="escribe el código"
+                                maxlength="30"
+                                autocomplete="off"
+                                spellcheck="false"
+                                aria-label="Código">
+                            <button type="submit" class="puzzle-submit" aria-label="Entrar">→</button>
+                        </form>
+                        <p class="puzzle-feedback" id="puzzleFeedback" aria-live="polite"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <script src="js/script.js"></script>
+</body>
+
+</html>

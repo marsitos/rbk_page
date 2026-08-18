@@ -1,0 +1,324 @@
+/* ================================
+   RESET
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body.RdelR-page {
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: "Playfair Display", serif;
+    color: #fff;
+    background:
+        radial-gradient(circle at 50% 100%, rgba(180, 120, 255, 0.25), transparent 40%),
+        radial-gradient(circle at 50% 60%, rgba(90, 60, 180, 0.4), transparent 55%),
+        radial-gradient(circle at bottom, #1b1f5a, #050714);
+}
+
+.RdelR-page::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+        radial-gradient(circle at 30% 70%, rgba(255,255,255,0.05), transparent 60%),
+        radial-gradient(circle at 70% 30%, rgba(120,120,255,0.06), transparent 65%);
+}
+.back-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 1rem;
+}
+/* ================================
+   FONDO GALAXIA
+================================ */
+
+.galaxy-bg {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+#stars {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.galaxy-content {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.galaxy-content h1 {
+    max-width: 900px;
+    font-size: clamp(2rem, 6vw, 4rem);
+    line-height: 1.15;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+    text-shadow:
+        0 0 10px rgba(255,255,255,0.35),
+        0 0 30px rgba(170,130,255,0.35);
+    animation: fadeInUp 2s ease-out both;
+}
+
+/* ================================
+   SECCIÓN VIRGO
+================================ */
+
+.virgo-section {
+    position: relative;
+    z-index: 3;
+    min-height: 100vh;
+    padding: 8rem 1.25rem 6rem;
+    color: #fff;
+}
+
+.virgo-title {
+    margin-bottom: 4rem;
+    text-align: center;
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    letter-spacing: 0.15em;
+    font-weight: 400;
+    opacity: 0.8;
+}
+
+.virgo-constellation {
+    position: relative;
+    width: min(100%, 900px);
+    margin: 0 auto;
+}
+
+.virgo-svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+}
+
+/* ================================
+   ESTRELLAS
+================================ */
+
+.virgo-star {
+    fill: #fff;
+    opacity: 0.3;
+    transition:
+        opacity 0.4s ease,
+        r 0.3s ease;
+}
+
+.virgo-star.active {
+    opacity: 1;
+    cursor: pointer;
+    transform-box: fill-box;
+    transform-origin: center;
+    filter:
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 8px rgba(180,140,255,0.9))
+        drop-shadow(0 0 16px rgba(150,100,255,0.5));
+    animation: starPulse 2s ease-in-out infinite;
+}
+
+.virgo-star.locked {
+    opacity: 0.18;
+}
+
+.virgo-star.decorative {
+    opacity: 0.28;
+}
+
+/* ================================
+   LÍNEAS DE CONSTELACIÓN
+================================ */
+
+.virgo-line {
+    stroke: rgba(255,255,255,0.55);
+    stroke-width: 1.6;
+    filter: drop-shadow(0 0 3px rgba(255,255,255,0.4));
+}
+
+/* ================================
+   MODAL
+================================ */
+
+.text-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.25rem;
+    background: rgba(5,5,15,0.65);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.text-modal.hidden {
+    display: none;
+}
+
+.text-box {
+    width: min(100%, 720px);
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: clamp(1.5rem, 5vw, 2.8rem);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 24px;
+    background: rgba(255,255,255,0.07);
+    color: #f4f1ff;
+    line-height: 1.8;
+    font-family: "Poppins", sans-serif;
+    font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+    text-align: center;
+    box-shadow:
+        0 0 40px rgba(255,255,255,0.08),
+        0 20px 80px rgba(0,0,0,0.4);
+    animation: fadeUp 0.6s ease both;
+}
+
+#star-text {
+    margin-bottom: 1.8rem;
+}
+
+#closeText {
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 0.55rem 1.2rem;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.05);
+    color: #fff;
+    font-family: inherit;
+    cursor: pointer;
+    transition:
+        background 0.3s ease,
+        transform 0.3s ease;
+}
+
+#closeText:hover {
+    background: rgba(255,255,255,0.15);
+    transform: scale(1.05);
+}
+
+/* ================================
+   ANIMACIONES
+================================ */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+        filter: blur(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes starPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.35);
+    }
+}
+
+/* ================================
+   TABLET
+================================ */
+
+@media (max-width: 768px) {
+
+    .galaxy-content {
+        padding: 1.5rem;
+    }
+
+    .virgo-section {
+        padding-top: 5rem;
+    }
+
+    .virgo-constellation {
+        width: 100%;
+    }
+}
+
+/* ================================
+   CELULAR
+================================ */
+
+@media (max-width: 480px) {
+
+    .galaxy-content h1 {
+        font-size: clamp(1.9rem, 9vw, 2.6rem);
+        letter-spacing: 0.02em;
+    }
+
+    .virgo-section {
+        padding: 4rem 0.8rem;
+    }
+
+    .virgo-title {
+        margin-bottom: 3rem;
+        font-size: 1.25rem;
+        letter-spacing: 0.1em;
+    }
+
+    .text-box {
+        padding: 1.5rem 1.2rem;
+        border-radius: 20px;
+        line-height: 1.7;
+    }
+}
+
+/* ================================
+   REDUCIR ANIMACIONES
+================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
