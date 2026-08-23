@@ -1168,7 +1168,8 @@ body {
     z-index: 2;
     font-size: .7rem;
     letter-spacing: .5px;
-    color: var(--text-soft);
+    color: var(--black);
+    font-weight: bold;
 }
 
 /* =========================
