@@ -422,7 +422,7 @@ function initCursorTrail() {
 // nada ni muestra un ícono de imagen rota).
 const BG_PHOTOS = [
     "../assets/imgnosotros/foto1.jpeg",
-    "../assets/imgnosotros/foto2.jpg",
+    "../assets/imgnosotros/foto2.jpeg",
     "../assets/imgnosotros/foto3.jpg",
     "../assets/imgnosotros/foto4.jpg",
     "../assets/imgnosotros/foto5.jpg",
@@ -436,6 +436,11 @@ const BG_PHOTOS = [
     "../assets/imgnosotros/foto13.jpg",
     "../assets/imgnosotros/foto14.jpg",
     "../assets/imgnosotros/foto15.jpg",
+    "../assets/imgnosotros/foto16.jpeg",
+    "../assets/imgnosotros/foto17.jpg",
+    "../assets/imgnosotros/foto18.jpg",
+    "../assets/imgnosotros/foto19.jpg",
+    "../assets/imgnosotros/foto20.jpg",
 ];
 
 function initBgPhotos() {
@@ -477,21 +482,17 @@ function initBgPhotos() {
     }
 
     function loop() {
-
         // A veces una sola, a veces dos casi seguidas, para que
         // ocasionalmente coincidan varias fotos a la vez en pantalla.
         const batch = 1 + Math.floor(Math.random() * 2);
         for (let i = 0; i < batch; i++) {
             setTimeout(spawnPhoto, i * 900);
         }
-
         const next = 7000 + Math.random() * 7000; // cada 7-14s
         setTimeout(loop, next);
 
     }
-
     setTimeout(loop, 4000);
-
 }
 
 initAmbientStars();

@@ -26,6 +26,22 @@
         </div>
     </div>
     <div class="hearts-burst" aria-hidden="true" id="heartsBurst"></div>
+    <div class="heart-tracker" id="heartTracker" aria-hidden="true">
+        <span class="heart-tracker-icon">♡</span>
+        <span id="heartTrackerCount">0</span><span class="heart-tracker-sep">/5</span>
+    </div>
+
+    <!-- REVELACIÓN AL ENCONTRAR LOS 5 CORAZONES -->
+    <div class="heart-hunt-overlay" id="heartHuntOverlay" aria-hidden="true">
+        <div class="heart-hunt-card">
+            <p class="hh-line hh-line-1 show">Encontraste todos...</p>
+            <p class="hh-line hh-line-2">Aunque, siendo sincero, yo ya había encontrado mi corazón contigo hace tiempo.</p>
+            <div class="hh-code-reveal">
+                <span class="hh-code">🗝️ citasgg</span>
+            </div>
+            <button type="button" class="hh-close" id="heartHuntClose">cerrar</button>
+        </div>
+    </div>
 
 
     <!-- INTRO -->
@@ -54,6 +70,7 @@
         <!--SECCIÓN: TRES MESES -->
         <section class="months-section reveal">
             <div class="months-glow"></div>
+            <span class="hunt-heart hunt-heart-1" data-heart="1" role="button" tabindex="0" aria-label="♡">♡</span>
             
             <div class="months-content">
                 <span class="section-label">
@@ -106,6 +123,7 @@
 
         <!-- SIGUIENTE SECCIÓN -->
         <section class="together-section reveal">
+            <span class="hunt-heart hunt-heart-2" data-heart="2" role="button" tabindex="0" aria-label="♡">♡</span>
             
             <div class="together-content">
                 <span class="section-label">
@@ -197,7 +215,7 @@
 
         <!-- SECCIÓN: FORMA DE SER -->
         <section class="voice-section reveal">
-            
+            <span class="hunt-heart hunt-heart-3" data-heart="3" role="button" tabindex="0" aria-label="♡">♡</span>
             <div class="voice-content">
                 <span class="section-label">
                     Últimamente
@@ -248,6 +266,7 @@
         <section class="flowers-section reveal">
 
             <div class="petals-container" id="petalsContainer" aria-hidden="true"></div>
+            <span class="hunt-heart hunt-heart-4" data-heart="4" role="button" tabindex="0" aria-label="♡">♡</span>
             <div class="flowers-content">
                 <span class="section-label">
                     Para ti, cocolón
@@ -289,7 +308,7 @@
                 <p class="flowers-text">
                     Sé que te gustan las flores de todo tipo.
                     Pero estos los hice yo, pensando en ti,
-                    espero que te gusten, porque son para tu.
+                    espero que te gusten, porque son para tu (me corté😭).
                 </p>
             </div>
         </section>
@@ -335,6 +354,7 @@
         <section class="closing-section reveal">
             
             <div class="closing-glow"></div>
+            <span class="hunt-heart hunt-heart-5" data-heart="5" role="button" tabindex="0" aria-label="♡">♡</span>
             <div class="closing-content">
                 <span class="section-label">
                     25 · 08
@@ -363,7 +383,7 @@
                         class="puzzle-toggle"
                         aria-expanded="false"
                         aria-controls="puzzlePanel">
-                        <span class="puzzle-toggle-icon">✧</span>
+                        <span class="puzzle-toggle-icon">🗝️</span>
                         tengo un código para ti
                     </button>
                     <div class="puzzle-panel" id="puzzlePanel" aria-hidden="true">

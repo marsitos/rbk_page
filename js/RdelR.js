@@ -95,26 +95,15 @@ const virgoStars = document.querySelectorAll(".virgo-star[data-index]");
 let currentVirgoStar = 0;
 
 const virgoTexts = [
-  "Quería decirte algo desde hace un tiempo, la verdad hubiera sido muy lindo decírtelo en "+
-  "fin de año pero tenía mucha pena, aparte tampoco había terminado hasta donde quise "+
-  "la página que personalice para tí, aún no la termino y la verdad que no quiero terminarla "+
-  "porque el punto principal de la página es para guardar mi perspectiva de la historia "+
-  "nuestra, guardar nuestras fotos y de vez en cuando agregarte una que otra cosa bonita. ",
+  "",
   
-  "Me gusta mucho pasar tiempo contigo, me haces sentir tranquilo, tanto que por eso te "+
-  "digo que eres mi lugar seguro ya que al verte siempre me da sueño.",
+  "",
 
-  "En vista de que también has confesado tus sentimientos hacia mí y también por tus "+
-  "acciones me gustaría que estemos juntos por mucho tiempo ya que me gustas tal y "+
-  "como eres, peleona, cariñosa, amorosa, chistosa, chismosa, linda, por tus ganas de "+
-  "hablar, tus ganas de querer y amar, me gustas tú.",
+  "",
   
-  "Sé que sólo llevamos dos meses hablando pero me ha gustado mucho haberte conocido en este tiempo y me gustaría "+
-  "mucho más seguir conociéndote, quiero seguir compartiendo cosas contigo y construir algo lindo juntos.",
+  "",
   
-  "Hoy 16 de enero me gustaría estar en promesa contigo, prometo quererte cada día más que el anterior, prometo lealtad "+
-  "hacia tu persona y a nuestra relación, honestidad y sobre todo tranquilidad. Ahora ya sabes lo "+
-  "que te siento sinceramente y te quería decir que quisiera que seamos novios ¿Aceptas?",
+  "",
 ];
 
 const modal = document.querySelector(".text-modal");

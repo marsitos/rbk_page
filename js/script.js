@@ -55,6 +55,8 @@ function initAmbientStars() {
 const PUZZLE_CODES = {
     "rdelr": "puzzles/RdelR.html",
     "cocolon": "puzzles/YoPaTi.html",
+    "citasgg": "puzzles/CitasPlaneadas.html",
+    "recuerdos": "https://drive.google.com/drive/folders/1oWHLIezeag-UPwRhGHqrDzCS1WmvJGU4?usp=sharing",
     // "otrocodigo": "puzzles/puzzle2.html",
 };
 
@@ -208,6 +210,7 @@ function initCounter() {
 initAmbientStars();
 initPuzzle();
 initCounter();
+initHeartHunt();
 
 
 startButton.addEventListener("click", () => {
@@ -363,6 +366,87 @@ function initScrollProgress() {
     }, { passive: true });
 
     update();
+
+}
+
+
+// =========================
+// CAZA DE CORAZONES
+// =========================
+//
+// 5 corazones escondidos por distintas secciones. Al encontrar los 5,
+// se revela un mensaje en etapas y, al final, el código de un puzzle nuevo.
+function initHeartHunt() {
+
+    const hearts = document.querySelectorAll(".hunt-heart");
+    if (!hearts.length) return;
+
+    const tracker = document.getElementById("heartTracker");
+    const trackerCount = document.getElementById("heartTrackerCount");
+    let found = 0;
+
+    function handleFound(heart) {
+
+        if (heart.classList.contains("found")) return;
+
+        heart.classList.add("found");
+        heart.textContent = "♥";
+        heart.setAttribute("aria-disabled", "true");
+        found++;
+
+        if (tracker) tracker.classList.add("visible");
+        if (trackerCount) trackerCount.textContent = String(found);
+
+        if (found === hearts.length) {
+            setTimeout(openHeartHuntOverlay, 500);
+        }
+
+    }
+
+    hearts.forEach(heart => {
+
+        heart.addEventListener("click", () => handleFound(heart));
+
+        heart.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                handleFound(heart);
+            }
+        });
+
+    });
+
+    // El contador aparece apenas se encuentra el primero, no antes.
+    if (tracker) tracker.classList.remove("visible");
+
+}
+
+
+// Revela el mensaje final en tres tiempos y, al último,
+// el código que desbloquea la página de citas pendientes.
+function openHeartHuntOverlay() {
+
+    const overlay = document.getElementById("heartHuntOverlay");
+    if (!overlay) return;
+
+    const line2 = overlay.querySelector(".hh-line-2");
+    const codeReveal = overlay.querySelector(".hh-code-reveal");
+    const closeBtn = document.getElementById("heartHuntClose");
+
+    overlay.classList.add("open");
+    overlay.setAttribute("aria-hidden", "false");
+
+    setTimeout(() => line2 && line2.classList.add("show"), 1700);
+    setTimeout(() => codeReveal && codeReveal.classList.add("show"), 3400);
+
+    function closeOverlay() {
+        overlay.classList.remove("open");
+        overlay.setAttribute("aria-hidden", "true");
+    }
+
+    if (closeBtn) {
+        closeBtn.addEventListener("click", closeOverlay, { once: true });
+    }
 
 }
 
