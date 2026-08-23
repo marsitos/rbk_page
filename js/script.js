@@ -53,8 +53,8 @@ function initAmbientStars() {
 //
 // Cada código lleva a una página dentro del proyecto.
 const PUZZLE_CODES = {
-    "cocolon": "puzzles/puzzle1.html",
     "rdelr": "puzzles/RdelR.html",
+    "cocolon": "puzzles/YoPaTi.html",
     // "otrocodigo": "puzzles/puzzle2.html",
 };
 

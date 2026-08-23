@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0B0810">
+    <title>Yo · Pa · Ti ♡</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/YoPaTi.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+</head>
+<body class="yopati-page">
+
+    <!-- CAPAS DE AMBIENTE (mismas que el resto del proyecto) -->
+    <div class="ambient-particles" aria-hidden="true">
+        <div class="particle-layer particle-layer-1"></div>
+        <div class="particle-layer particle-layer-2"></div>
+    </div>
+    <div class="ambient-stars" aria-hidden="true" id="ambientStars"></div>
+    <div class="grain-overlay" aria-hidden="true"></div>
+    <div class="bg-photos" aria-hidden="true" id="bgPhotos"></div>
+    <div class="hearts-burst" aria-hidden="true" id="heartsBurst"></div>
+
+    <!-- Barra de progreso de lectura -->
+    <div class="scroll-progress" aria-hidden="true" id="scrollProgress">
+        <div class="scroll-progress-track">
+            <div class="scroll-progress-fill" id="scrollProgressFill"></div>
+        </div>
+    </div>
+
+    <!-- =========================
+         ESCENA: SOBRE
+    ========================== -->
+    <div class="envelope-scene" id="envelopeScene">
+        <div class="envelope-glow" aria-hidden="true"></div>
+        <span class="envelope-label">para cocolón</span>
+        <button type="button" class="envelope" id="envelopeButton" aria-label="Abrir la carta">
+            <span class="envelope-letter-peek"></span>
+            <span class="envelope-flap"></span>
+            <span class="envelope-seal">♥</span>
+            <span class="envelope-back"></span>
+        </button>
+        <p class="envelope-hint">toca el sobre para abrirlo</p>
+    </div>
+
+    <!-- =========================
+         LA CARTA
+    ========================== -->
+    <main class="letter-wrapper" id="letterWrapper" hidden>
+
+        <section class="letter-section reveal">
+            <span class="letter-index">01 · 13</span>
+            <p class="letter-text">
+                Hola mi cocoloncito, no sé cómo empezar esto la verdad
+                pero haré lo mejor que pueda. Probablemente cuando lo
+                estés leyendo yo estaré pensando en cositas que pude
+                cambiar y demás.
+            </p>
+        </section>
+
+        <section class="letter-section reveal">
+            <span class="letter-index">02 · 13</span>
+            <p class="letter-text">
+                Una de las cosas que más me gusta de nuestra relación
+                es que surgimos de manera inesperada, simplemente nos
+                conocimos y nos llevamos bien, y de ahí surgió algo
+                que no me esperaba pero que me hace muy feliz. El día
+                que nos conocimos fue una bonita coincidencia el
+                haber regresado y poder coincidir por primera vez.
+            </p>
+        </section>
+
+        <section class="letter-section reveal">
+            <span class="letter-index">03 · 13</span>
+            <p class="letter-text">
+                Poco a poco empecé a conocerte, a compartir contigo,
+                a salir contigo, a reírme contigo, a tomarnos fotos
+                juntos y, sin darme cuenta, empecé a hacer espacio
+                para ti en mi vida. Cuando pienso en los pocos meses
+                que nos conocemos se me vienen muchos espacios
+                bonitos que hemos compartido, y me hace feliz que
+                hayamos compartido todo juntos, y lo que falta.
+            </p>
+        </section>
+
+        <section class="letter-section reveal">
+            <span class="letter-index">04 · 13</span>
+            <p class="letter-text">
+                Me gusta mucho tu manera de intentar hacerme reír
+                pero no te sale... tu manera de hablar y expresarte,
+                las cosas que se te ocurren, tu forma de estar
+                nerviosa cuando estás conmigo, el hecho de conectar
+                tan bien contigo en tan poco tiempo y con tanta
+                facilidad, las fotos que nos sacamos, las salidas que
+                hemos tenido, los momentos pequeños y no tan
+                pequeños, especialmente el día que salimos con tus
+                amigos del curso y la pasamos tan bien juntos que
+                empecé a sentir una tranquilidad que de a poco se fue
+                haciendo más grande al estar contigo.
+                <span class="letter-highlight">Paz, tranquilidad y felicidad.</span>
+            </p>
+        </section>
+
+        <section class="letter-section reveal">
+            <span class="letter-index">05 · 13</span>
+            <p class="letter-text">
+                Claramente hemos tenido momentos bonitos y otros no
+                tanto, en los cuales hemos dejado en claro las cosas
+                fundamentales que nos llevaron a ser quienes somos
+                hoy y la relación de cercanía que tenemos. Me alegro
+                mucho el haber tenido todas esas conversaciones
+                contigo, porque conllevaron a saber quiénes somos y
+                qué esperamos de nosotros como pareja.
+            </p>
+        </section>
+
+        <section class="letter-section reveal">
+            <span class="letter-index">06 · 13</span>
+            <p class="letter-text">
+                Me importas mucho, me hace feliz tenerte, mi
+                corazoncito se pone contento cada vez que veo que te
+                acercas a mí y sonrío sin darme cuenta; cada vez que
+                me abrazas y estamos juntos siento algo muy bonito.
+            </p>
+        </section>
+
+        <section class="letter-section reveal">
+            <span class="letter-index">07 · 13</span>
+            <p class="letter-text">
+                Este texto está pensado para decirte las cosas que no
+                he podido decirte en persona porque me puedo poner
+                nervioso y no me sale, pero sé que mientras más nos
+                conozcamos y estemos juntos, será mucho más fácil
+                hacer que las palabras y frases románticas surjan.
+            </p>
+        </section>
+
+        <section class="letter-section reveal">
+            <span class="letter-index">08 · 13</span>
+            <p class="letter-text">
+                La página que te hice está dedicada a que no sea algo
+                solamente para tu cumpleaños; tengo pensado que sea
+                un espacio que pueda ir actualizando y enseñándote
+                cosas nuevas cada vez, pero tendrás que esperar y
+                descubrirlas por ti misma.
+            </p>
+        </section>
+
+        <section class="letter-section reveal">
+            <span class="letter-index">09 · 13</span>
+            <p class="letter-text">
+                Mientras escribo esto y mientras avanzo la página voy
+                a estar pensando en ti, en lo que te gusta, en
+                nosotros, en todo lo que he aprendido de ti y
+                contigo. Conocerte, descubrir quién eres y qué te
+                gusta me hace muy feliz; me gusta que me tengas la
+                confianza para contarme cosas sobre ti y lo que
+                tienes en el momento, me gusta escucharte y que en mí
+                puedas encontrar un espacio de confianza y seguridad,
+                me gusta que en un momento podamos hablar de cosas
+                serias y al rato estar bien porque nos entendimos muy
+                bien y transmitimos lo que queríamos hacer saber.
+            </p>
+        </section>
+
+        <section class="letter-section reveal">
+            <span class="letter-index">10 · 13</span>
+            <p class="letter-text">
+                Quiero seguir conociéndote, que sigamos creando más
+                recuerdos juntos, que algún día veamos las fotos que
+                nos hemos tomado hace años y recordemos lo que
+                vivimos y lo que pasó ese día. Quiero aprender a
+                entenderte también si las cosas se ponen difíciles, y
+                quiero saber qué hacer para que te sientas mejor, por
+                ti y por mí — me gusta tu bienestar.
+            </p>
+        </section>
+
+        <section class="letter-section reveal">
+            <span class="letter-index">11 · 13</span>
+            <p class="letter-text">
+                No sé qué pasará mañana ni en un futuro, pero sé que
+                en el hoy quiero tenerte presente, quiero estar cerca
+                tuyo, elegirte y que me elijas, que sientas que
+                conmigo no tienes que esconder nada, conocerte
+                completamente con tus cosas bonitas y las no tanto,
+                en tus días buenos y malos, quitar tus inseguridades,
+                miedos e inquietudes y demostrarte que estaré aquí
+                siempre contigo y para ti. Porque para mí quererte
+                significa aprenderte, y aún me falta demasiado por
+                aprender de ti. Me alegra mucho haberte conocido y
+                haber mejorado mutuamente para ser quienes somos hoy,
+                y lo que seremos en un futuro.
+            </p>
+        </section>
+
+        <section class="letter-section reveal">
+            <span class="letter-index">12 · 13</span>
+            <p class="letter-text">
+                Una vez me dijiste que se te hacía muy intrigante que
+                dos personas muy opuestas se conozcan, y querías
+                saber qué podría resultar de ahí. Tenemos gustos
+                distintos, personalidades distintas y distintas
+                formas de pensar; aun así, con eso funcionamos, y es
+                bonito porque es muy difícil encontrar a alguien con
+                quien compaginar de esa manera. Me alegra habernos
+                encontrado.
+            </p>
+        </section>
+
+        <section class="letter-section reveal">
+            <span class="letter-index">13 · 13</span>
+            <p class="letter-text letter-text-birthday">
+                Feliz cumpleaños mi cocoloncito, espero que la pases
+                muy bien y quiero estar presente en tu próximo
+                cumple. Espero ya estar más estable en todos los
+                aspectos para poder hacer que pases un cumpleaños
+                mejor que este, y cada vez más.
+            </p>
+        </section>
+
+        <!-- Cierre / firma -->
+        <section class="letter-section signature-section reveal" id="signatureSection">
+            <div class="signature-content">
+                <p class="signature-mark">
+                    Team quesito mohoso <span class="sig-heart">♥</span>
+                </p>
+                <a href="../index.html" class="start-button back-button">
+                    Volver
+                    <span>↩</span>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="../js/YoPaTi.js"></script>
+</body>
+</html>
