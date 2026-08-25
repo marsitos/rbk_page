@@ -393,6 +393,11 @@ function initCursorTrail() {
 
     window.addEventListener("pointermove", (event) => {
 
+        // En táctil, el scroll también dispara "pointermove", lo que
+        // generaba chispitas justo mientras se hacía scroll y competía
+        // con la animación de aparición del texto. Solo mouse/pen.
+        if (event.pointerType === "touch") return;
+
         const now = Date.now();
         if (now - lastTime < THROTTLE_MS) return;
 
