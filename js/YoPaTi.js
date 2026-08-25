@@ -96,28 +96,36 @@ function wrapWordsIn(node, chunkSize) {
 
             const frag = document.createDocumentFragment();
             const parts = child.textContent.split(/(\s+)/);
-
+        
             let pendingSpan = null;
             let wordsInSpan = 0;
+            let bufferedSpace = "";
 
             parts.forEach(part => {
                 if (part.trim() === "") {
-                    if (pendingSpan) {
-                        pendingSpan.textContent += part;
-                    } else {
-                        frag.appendChild(document.createTextNode(part));
-                    }
+                    bufferedSpace += part;
                 } else {
                     if (!pendingSpan || wordsInSpan >= chunkSize) {
+                        if (bufferedSpace) {
+                            frag.appendChild(document.createTextNode(bufferedSpace));
+                            bufferedSpace = "";
+                        }
                         pendingSpan = document.createElement("span");
                         pendingSpan.className = "word";
                         frag.appendChild(pendingSpan);
                         wordsInSpan = 0;
+                    } else if (bufferedSpace) {
+                        pendingSpan.textContent += bufferedSpace;
+                        bufferedSpace = "";
                     }
                     pendingSpan.textContent += part;
                     wordsInSpan++;
                 }
             });
+
+            if (bufferedSpace) {
+                frag.appendChild(document.createTextNode(bufferedSpace));
+            }
 
             node.replaceChild(frag, child);
 
@@ -130,6 +138,7 @@ function wrapWordsIn(node, chunkSize) {
 }
 
 function initWordReveal() {
+
     const isMobile = window.innerWidth < 600;
     const chunkSize = isMobile ? 3 : 1;
 
