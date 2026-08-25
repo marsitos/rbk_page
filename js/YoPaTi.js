@@ -88,7 +88,7 @@ function initEnvelope() {
 // =========================
 // PALABRA POR PALABRA
 // =========================
-function wrapWordsIn(node) {
+function wrapWordsIn(node, chunkSize) {
 
     Array.from(node.childNodes).forEach(child => {
 
@@ -97,21 +97,32 @@ function wrapWordsIn(node) {
             const frag = document.createDocumentFragment();
             const parts = child.textContent.split(/(\s+)/);
 
+            let pendingSpan = null;
+            let wordsInSpan = 0;
+
             parts.forEach(part => {
                 if (part.trim() === "") {
-                    frag.appendChild(document.createTextNode(part));
+                    if (pendingSpan) {
+                        pendingSpan.textContent += part;
+                    } else {
+                        frag.appendChild(document.createTextNode(part));
+                    }
                 } else {
-                    const span = document.createElement("span");
-                    span.className = "word";
-                    span.textContent = part;
-                    frag.appendChild(span);
+                    if (!pendingSpan || wordsInSpan >= chunkSize) {
+                        pendingSpan = document.createElement("span");
+                        pendingSpan.className = "word";
+                        frag.appendChild(pendingSpan);
+                        wordsInSpan = 0;
+                    }
+                    pendingSpan.textContent += part;
+                    wordsInSpan++;
                 }
             });
 
             node.replaceChild(frag, child);
 
         } else if (child.nodeType === Node.ELEMENT_NODE) {
-            wrapWordsIn(child);
+            wrapWordsIn(child, chunkSize);
         }
 
     });
@@ -119,11 +130,13 @@ function wrapWordsIn(node) {
 }
 
 function initWordReveal() {
+    const isMobile = window.innerWidth < 600;
+    const chunkSize = isMobile ? 3 : 1;
 
     const paragraphs = document.querySelectorAll(".letter-text");
 
     paragraphs.forEach(p => {
-        wrapWordsIn(p);
+        wrapWordsIn(p, chunkSize);
         const words = p.querySelectorAll(".word");
         words.forEach((word, i) => word.style.setProperty("--i", i));
     });
@@ -419,12 +432,6 @@ function initCursorTrail() {
 // =========================
 // FOTOS DE FONDO (DESTELLOS)
 // =========================
-//
-// Coloca tus fotos en una carpeta "img/nosotros/" en la raíz del
-// proyecto (junto a css/ y js/) y lista aquí sus nombres. Puedes
-// agregar o quitar las que quieras; no hay un número fijo.
-// Si alguna todavía no existe, simplemente no aparece (no rompe
-// nada ni muestra un ícono de imagen rota).
 const BG_PHOTOS = [
     "../assets/imgnosotros/foto1.jpeg",
     "../assets/imgnosotros/foto2.jpeg",
@@ -487,8 +494,6 @@ function initBgPhotos() {
     }
 
     function loop() {
-        // A veces una sola, a veces dos casi seguidas, para que
-        // ocasionalmente coincidan varias fotos a la vez en pantalla.
         const batch = 1 + Math.floor(Math.random() * 2);
         for (let i = 0; i < batch; i++) {
             setTimeout(spawnPhoto, i * 900);
