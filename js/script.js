@@ -3,16 +3,13 @@ const mainContent = document.getElementById("mainContent");
 const intro = document.querySelector(".intro");
 
 
-// Estrellas de fondo (✦ ✧ ·) que titilan al azar por toda la página.
-// Se generan una sola vez, en posiciones y tiempos aleatorios,
-// pensadas para acompañar sin llamar la atención.
 function initAmbientStars() {
 
     const container = document.getElementById("ambientStars");
     if (!container || container.dataset.built) return;
 
-    const symbols = ["✦", "✧", "·", "·"]; // "·" repetido a propósito: más frecuente y discreto
-    const colorClasses = ["", "purple", "gold"]; // "" = blanco (var(--white))
+    const symbols = ["✦", "✧", "·", "·"];
+    const colorClasses = ["", "purple", "gold"]; 
 
     const isMobile = window.innerWidth < 600;
     const count = isMobile ? 16 : 26;
@@ -30,8 +27,8 @@ function initAmbientStars() {
         const left = Math.random() * 100;
         const size = symbol === "·" ? 6 + Math.random() * 5 : 10 + Math.random() * 12;
         const duration = 3 + Math.random() * 5;
-        const delay = -(Math.random() * duration * 2); // arranca a mitad de ciclo, en distintos puntos
-        const peakOpacity = 0.25 + Math.random() * 0.35; // nunca demasiado brillante
+        const delay = -(Math.random() * duration * 2);
+        const peakOpacity = 0.25 + Math.random() * 0.35; 
 
         star.style.top = top + "%";
         star.style.left = left + "%";
@@ -57,6 +54,10 @@ const PUZZLE_CODES = {
     "cocolon": "puzzles/YoPaTi.html",
     "citasgg": "puzzles/CitasPlaneadas.html",
     "recuerdos": "https://drive.google.com/drive/folders/1oWHLIezeag-UPwRhGHqrDzCS1WmvJGU4?usp=sharing",
+    "nuestrosmeses": "puzzles/NuestrosMeses.html",
+    "palabras": "puzzles/Carta.html",
+    "olarbk": "puzzles/Pregunta.html",
+    "13noviembre": "puzzles/NuestraFecha.html",
     // "otrocodigo": "puzzles/puzzle2.html",
 };
 
@@ -122,15 +123,8 @@ function initPuzzle() {
 // =========================
 // CONTADOR DINÁMICO
 // =========================
-//
-// Fecha de inicio: 13 de mayo de 2026, 16:21:02.
-// Nota: el mes en JavaScript es 0-indexado (0 = enero), por eso
-// mayo se escribe como 4.
 const COUNTER_START = new Date(2026, 4, 13, 16, 21, 2);
 
-// Descompone el tiempo transcurrido entre "start" y "now" en
-// años, meses, semanas, días, horas, minutos y segundos,
-// tomando en cuenta la duración real de cada mes (no un promedio).
 function getElapsedBreakdown(start, now) {
 
     let years = now.getFullYear() - start.getFullYear();

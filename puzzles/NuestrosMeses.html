@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestros meses ♡</title>
+<link rel="stylesheet" href="shared.css">
+<link rel="stylesheet" href="../css/nuestrosmeses.css">
+</head>
+<body class="t-night">
+<div class="bgfx" id="bgA" aria-hidden="true"></div>
+<div class="bgfx" id="bgB" aria-hidden="true"></div>
+<div class="bgveil" aria-hidden="true"></div>
+<div class="hearts" id="hearts" aria-hidden="true"></div>
+
+<div class="top">
+  <div class="toprow"><a href="../index.html">← volver</a><span>bechito</span></div>
+  <div class="search">
+    <span class="ic">⌕</span>
+    <input id="q" type="search" placeholder="Busca un mes o año: julio, 2026, tulipanes…" autocomplete="off" aria-label="Buscar mes">
+    <button class="clr" id="clr" aria-label="Borrar">✕</button>
+    <div class="res" id="res"></div>
+  </div>
+</div>
+
+<div class="side" id="side"></div>
+<div class="scroller" id="sc"></div>
+
+<div class="story" id="story" aria-hidden="true">
+  <div class="sbox" id="sbox">
+    <div class="bars" id="bars"></div>
+    <button class="sx" id="sx" aria-label="Cerrar">✕</button>
+    <button class="tap l" id="tl" aria-label="Anterior"></button>
+    <button class="tap r" id="tr" aria-label="Siguiente"></button>
+    <div class="sbody" id="sbody"></div>
+    <div class="hint">toca para avanzar · ← → · Esc para cerrar</div>
+  </div>
+</div>
+
+<script src="shared.js"></script>
+<script src="../js/meses-data.js"></script>
+<script src="../js/nuestrosmeses.js"></script>
+</body>
+</html>

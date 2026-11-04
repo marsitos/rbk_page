@@ -1,0 +1,30 @@
+body { background: #170E15; }
+
+    /* ===== Carrusel de fotos: columnas que suben de abajo hacia arriba ===== */
+    .collage { position: fixed; inset: 0; z-index: 0; overflow: hidden; display: grid; gap: 14px; padding: 0 14px;
+        grid-template-columns: repeat(var(--cols, 2), 1fr); }
+    .col { position: relative; overflow: hidden; }
+    .track { will-change: transform; animation: rise var(--dur, 60s) linear infinite; animation-delay: var(--dl, 0s); }
+    .seq { display: flex; flex-direction: column; gap: 14px; padding-bottom: 14px; }
+    @keyframes rise { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+
+    /* ===== Marco de foto instantánea (estilo cámara) ===== */
+    .frame { margin: 0 6px; padding: 10px 10px 8px; background: #FBF7EF; border-radius: 3px;
+        box-shadow: 0 10px 28px rgba(0,0,0,.5); transform: rotate(var(--r, 0deg)); filter: brightness(.95); }
+    .frame .ph { aspect-ratio: 1 / 1; overflow: hidden; background: #2a1f26; }
+    .frame img { width: 100%; height: 100%; display: block; object-fit: cover; }
+    .frame figcaption { height: 30px; line-height: 32px; text-align: center;
+        font-family: 'Caveat', cursive; font-size: 1.05rem; color: #6B5A5A; }
+
+    /* Velo para que el texto siempre se lea sobre las fotos */
+    .veil { position: fixed; inset: 0; z-index: 1; pointer-events: none;
+        background:
+            radial-gradient(circle at 50% 44%, rgba(23,14,21,.62), rgba(23,14,21,.20) 78%),
+            linear-gradient(180deg, rgba(185,108,124,.18), rgba(23,14,21,.28)); }
+
+    .wrap { position: relative; z-index: 2; }
+    .cd div { background: rgba(23,14,21,.62); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+    h1, .lead, .big { text-shadow: 0 2px 18px rgba(0,0,0,.6); }
+    .lead { color: #E6D3D8; }
+
+    @media (prefers-reduced-motion: reduce) { .track { animation: none; } }

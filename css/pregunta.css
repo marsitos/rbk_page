@@ -1,0 +1,55 @@
+.wrap { position: relative; z-index: 2; }
+
+    /* Pantalla de entrada: el toque del usuario es lo que permite que suene la música */
+    #gate { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column;
+        align-items: center; justify-content: center; padding: 30px; text-align: center;
+        background: #0B0810; transition: opacity 1.4s ease; }
+    #gate.off { opacity: 0; pointer-events: none; }
+    .pulse { font-size: 2.4rem; color: var(--accent2); animation: pulse 1.6s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { transform: scale(1); opacity: .7; } 50% { transform: scale(1.25); opacity: 1; } }
+
+    /* Resplandor que crece despacio mientras se acerca la pregunta */
+    #halo { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0;
+        background: radial-gradient(circle at 50% 55%, rgba(231,160,174,.30), transparent 58%);
+        transition: opacity 14s ease; }
+    #halo.on { opacity: 1; }
+
+    /* Estrellitas que titilan */
+    #stars { position: fixed; inset: 0; z-index: 1; pointer-events: none; }
+    #stars i { position: absolute; font-style: normal; color: var(--accent2); opacity: 0;
+        animation: tw var(--t) ease-in-out infinite; animation-delay: var(--dl); }
+    @keyframes tw { 0%,100% { opacity: 0; } 50% { opacity: var(--p); } }
+
+    .btn.main { animation: glow 2.6s ease-in-out infinite; }
+    @keyframes glow { 0%,100% { box-shadow: 0 0 0 0 rgba(252,211,77,0); } 50% { box-shadow: 0 0 22px 2px rgba(252,211,77,.35); } }
+
+    #mute { position: fixed; right: 16px; bottom: 16px; z-index: 70; width: 38px; height: 38px;
+        border-radius: 50%; border: 1px solid var(--line); background: rgba(11,8,16,.55);
+        color: var(--soft); font-size: 1rem; cursor: pointer; display: none; }
+
+    @media (prefers-reduced-motion: reduce) { .pulse, .btn.main, #stars i { animation: none; } }
+
+[hidden] { display: none !important; }
+
+/* Botón "No" que se escapa */
+.btn.no.fleeing { position: fixed; z-index: 60; margin: 0; transition: left .28s cubic-bezier(.3,1.4,.5,1), top .28s cubic-bezier(.3,1.4,.5,1); }
+#yes { transform: scale(var(--grow, 1)); transition: transform .3s; }
+
+/* Pantalla después del "Sí" */
+.fx { opacity: 0; animation: fxIn 1s ease forwards; animation-delay: var(--d, 0s); }
+@keyframes fxIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+#dTitle { white-space: pre-line; }
+a.btn { text-decoration: none; display: inline-block; }
+.polas { display: flex; justify-content: center; gap: 14px; margin: 26px 0 6px; flex-wrap: wrap; }
+.pola { background: #FBF7EF; padding: 7px 7px 20px; border-radius: 3px; box-shadow: 0 10px 26px rgba(0,0,0,.5); transform: rotate(var(--r, 0deg)); }
+.pola img { width: 96px; height: 96px; object-fit: cover; display: block; }
+
+/* Carta */
+.letter { position: fixed; inset: 0; z-index: 90; display: flex; align-items: center; justify-content: center; padding: 20px;
+    background: rgba(10,5,9,.82); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.paper { width: min(460px, 100%); max-height: 86vh; overflow-y: auto; background: #FBF7EF; color: #4a3a3a; border-radius: 6px; padding: 30px 26px; text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,.6); }
+.paper p { font-family: Georgia, 'Times New Roman', serif; font-size: 1.1rem; line-height: 1.7; white-space: pre-line; text-align: left; margin: 0 0 22px; }
+
+.btn.main.fx { animation: fxIn 1s ease forwards, glow 2.6s ease-in-out infinite; animation-delay: var(--d, 0s), calc(var(--d, 0s) + 1s); }
+
+@media (prefers-reduced-motion: reduce) { .fx, .btn.main.fx { animation: none; opacity: 1; } .btn.no.fleeing, #yes { transition: none; } }
