@@ -14,6 +14,7 @@
     <main class="galaxy-bg">
 
         <canvas id="stars"></canvas>
+        <div class="butterflies" id="butterflies" aria-hidden="true"></div>
 
         <section class="galaxy-content">
             <h1>You will always be my galaxy</h1>
@@ -79,6 +80,27 @@
             <button id="closeText" type="button" aria-label="Cerrar mensaje">
                 ✦
             </button>
+
+            <!-- Última estrella: la pregunta -->
+            <div id="question" hidden>
+                <div class="q-icon" id="qIcon"></div>
+                <p class="q-small" id="qIntro"></p>
+                <h3 class="q-title" id="qTitle"></h3>
+                <div class="q-btns">
+                    <button class="q-btn q-yes" id="yes" type="button">Sí</button>
+                    <button class="q-btn q-no" id="no" type="button">No</button>
+                </div>
+                <p class="q-msg" id="noMsg"></p>
+            </div>
+
+            <!-- Después del "Sí" -->
+            <div id="answer" hidden>
+                <p class="q-small" id="aEyebrow"></p>
+                <h3 class="q-title" id="aTitle"></h3>
+                <p class="a-time" id="aTime"></p>
+                <p class="a-words" id="aWords"></p>
+                <a class="q-btn q-yes" id="aCta" href="NuestraFecha.html"></a>
+            </div>
         </div>
     </div>
     <div class="back-container">
@@ -88,6 +110,10 @@
         </a>
     </div>
 
-    <script src="../js/RdelR.js"></script>
+    <script src="../js/RdelR/RdelR-data.js"></script>
+    <script src="../js/RdelR/RdelR-fondo.js"></script>
+    <script src="../js/RdelR/RdelR-pregunta.js"></script>
+    <script src="../js/RdelR/RdelR-constelacion.js"></script>
+    <script src="../js/RdelR/RdelR-escritorio.js"></script>
 </body>
 </html>

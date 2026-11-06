@@ -50,7 +50,7 @@ function initAmbientStars() {
 //
 // Cada código lleva a una página dentro del proyecto.
 const PUZZLE_CODES = {
-    "rdelr": "puzzles/RdelR.html",
+    "rdelrjeje": "puzzles/RdelR.html",
     "cocolon": "puzzles/YoPaTi.html",
     "citasgg": "puzzles/CitasPlaneadas.html",
     "recuerdos": "https://drive.google.com/drive/folders/1oWHLIezeag-UPwRhGHqrDzCS1WmvJGU4?usp=sharing",

@@ -1,0 +1,64 @@
+/* ===== Puzzle del planeta (se carga junto a los efectos de computador) ===== */
+
+/* La sección del título cubría el planeta y se comía los clics */
+body.fx-desktop .galaxy-content { pointer-events: none; }
+body.fx-desktop .galaxy-content h1 { pointer-events: none; } /* así las luces se pueden tocar aunque queden sobre el texto */
+
+body.fx-over-grab { cursor: grab; }
+body.fx-over-hold { cursor: pointer; }
+body.fx-dragging { cursor: grabbing; user-select: none; -webkit-user-select: none; }
+
+/* Núcleo que se carga */
+.fx-core {
+    position: absolute; left: 50%; top: 50%; width: 64%; height: 64%; margin: -32% 0 0 -32%;
+    border-radius: 50%; z-index: 2; pointer-events: none;
+    background: radial-gradient(circle, rgba(255,246,255,.95) 0, rgba(240,190,250,.65) 35%, rgba(186,85,211,0) 70%);
+    opacity: var(--p, 0); transform: scale(calc(.35 + var(--p, 0) * .75));
+}
+.fx-planet.charging .fx-sphere { animation: fxTremble .09s linear infinite; }
+@keyframes fxTremble { 0% { transform: translate(1.2px, -1px); } 50% { transform: translate(-1.2px, 1px); } 100% { transform: translate(1.2px, -1px); } }
+
+/* Cerca de la posición correcta de los anillos, y destello al resolver un paso */
+.fx-planet.near .fx-par::before { opacity: 1; transform: scale(1.25); }
+.fx-planet.near .fx-ring { opacity: 1; }
+.fx-planet.flash .fx-par::before { animation: fxFlash .9s ease; }
+@keyframes fxFlash { 0% { transform: scale(1); opacity: 1; } 40% { transform: scale(1.7); opacity: 1; } 100% { transform: scale(1); opacity: .85; } }
+
+/* Indicador de pasos (3 puntitos) y pista */
+.fx-steps { position: absolute; left: 50%; top: calc(100% + 10px); transform: translateX(-50%); display: flex; gap: 14px; }
+.fx-dot { width: 9px; height: 9px; border-radius: 50%; border: 1px solid rgba(233,176,242,.5); transition: background .6s, box-shadow .6s; }
+.fx-dot.on { background: #E9B0F2; box-shadow: 0 0 12px 3px rgba(186,85,211,.8); }
+.fx-hint {
+    position: absolute; left: 50%; top: calc(100% + 30px); width: 340px; margin-left: -170px; text-align: center;
+    font-family: "Playfair Display", serif; font-style: italic; font-size: .9rem; line-height: 1.2; color: rgba(233,176,242,.88);
+    opacity: 0; transition: opacity 1.2s ease; text-shadow: 0 0 12px rgba(0,0,0,.7); pointer-events: none;
+}
+.fx-hint.on { opacity: 1; }
+
+/* Luces de la secuencia */
+.fx-orbs { position: absolute; inset: 0; pointer-events: none; }
+.fx-orb {
+    position: absolute; left: calc(50% + var(--ox) * var(--S)); top: calc(50% + var(--oy) * var(--S));
+    width: 26px; height: 26px; margin: -13px 0 0 -13px; border-radius: 50%;
+    background: radial-gradient(circle, #fff 0, #E9B0F2 35%, rgba(186,85,211,0) 72%);
+    box-shadow: 0 0 14px 4px rgba(186,85,211,.5);
+    opacity: 0; transform: scale(.6);
+    transition: opacity .8s ease, transform .25s ease, box-shadow .25s ease;
+}
+.fx-orbs.on .fx-orb { opacity: .4; transform: scale(1); pointer-events: auto; cursor: pointer; }
+.fx-orbs.on .fx-orb:hover { opacity: .75; }
+.fx-orbs.on .fx-orb.flash { opacity: 1; transform: scale(1.5); box-shadow: 0 0 26px 10px rgba(233,176,242,.9); }
+.fx-orbs.on .fx-orb.lit { opacity: 1; box-shadow: 0 0 18px 6px rgba(233,176,242,.85); }
+.fx-orbs.on .fx-orb.bad { animation: fxBad .5s ease; box-shadow: 0 0 18px 6px rgba(255,122,168,.85); }
+@keyframes fxBad { 0%,100% { transform: translateX(0) scale(1); } 25% { transform: translateX(-6px) scale(1); } 75% { transform: translateX(6px) scale(1); } }
+
+/* Transición: entrar al planeta */
+.fx-dive {
+    position: fixed; z-index: 900; border-radius: 50%; pointer-events: none; opacity: 0; will-change: transform;
+    background: radial-gradient(circle at 34% 30%, #E9B0F2, #BA55D3 40%, #7A2F8F 100%);
+    transition: transform 1.9s cubic-bezier(.6, 0, .9, .4), opacity .5s ease;
+}
+.fx-dive.go { transform: scale(var(--k)); opacity: 1; }
+.fx-dive-fill { position: absolute; inset: 0; border-radius: 50%; background: #BA55D3; opacity: 0; transition: opacity .45s ease; }
+.fx-dive.solid .fx-dive-fill { opacity: 1; }
+body.fx-diving { overflow: hidden; }
