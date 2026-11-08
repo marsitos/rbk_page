@@ -3,26 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#BA55D3">
+    <meta name="theme-color" content="#08040f">
     <title>Dentro del planeta 💜</title>
-    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/Interior.css">
 </head>
 
-<body class="Interior-page">
+<body class="Interior-page" data-desbloquea="interior">
+
+    <div class="cielo" id="cielo" aria-hidden="true"></div>
+    <div class="via" aria-hidden="true"></div>
+    <div class="mariposas" id="mariposas" aria-hidden="true"></div>
+    <div class="suelo" aria-hidden="true"></div>
+
+    <a href="../index.html" class="volver">← volver</a>
 
     <main class="interior">
-        <h1>Dentro del planeta</h1>
-        <p>Aquí va a vivir la experiencia interactiva.</p>
-        <p class="pendiente">(página en construcción)</p>
+        <header class="cabecera">
+            <h1>Dentro del planeta</h1>
+            <p id="instruccion"></p>
+            <p class="progreso" id="progreso"></p>
+            <p class="final" id="final" hidden></p>
+        </header>
+        <div class="campo" id="campo"></div>
     </main>
 
-    <div class="back-container">
-        <a href="RdelR.html" class="start-button">
-            Volver
-            <span>↩</span>
-        </a>
+    <!-- Recuerdo abierto -->
+    <div class="memoria" id="memoria" inert>
+        <div class="tarjeta" role="dialog" aria-modal="true" aria-labelledby="mTitulo">
+            <button type="button" class="cerrar" id="cerrar" aria-label="Cerrar">✕</button>
+            <figure class="polaroid" id="polaroid"><img id="foto" alt=""></figure>
+            <small id="mTitulo"></small>
+            <p id="mTexto"></p>
+        </div>
     </div>
 
+    <script src="../js/desbloqueos.js"></script>
+    <script src="../js/interior-data.js"></script>
+    <script src="../js/Interior.js"></script>
 </body>
 </html>

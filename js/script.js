@@ -360,6 +360,7 @@ function openHeartHuntOverlay() {
     setTimeout(() => codeReveal && codeReveal.classList.add("show"), 3400);
 
     function closeOverlay() {
+        if (overlay.contains(document.activeElement)) document.activeElement.blur();
         overlay.classList.remove("open");
         overlay.setAttribute("aria-hidden", "true");
     }

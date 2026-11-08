@@ -164,6 +164,7 @@
 
   // ----- Transición: viaje galáctico hacia el interior del planeta -----
   function sumergirse() {
+    if (window.Desbloqueos) Desbloqueos.registrar("interior"); // queda en "Descubiertas"
     const r = sphere.getBoundingClientRect();
     const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
     document.body.classList.add("fx-diving");

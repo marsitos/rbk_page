@@ -78,12 +78,10 @@
     align-items: center;
     justify-content: center;
     padding: 24px;
-    background: rgba(8,6,12,.82);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(8,6,12,.93);
     opacity: 0;
     pointer-events: none;
-    transition: opacity .5s ease;
+    transition: opacity .25s ease;
 }
 .dsc-overlay.open { opacity: 1; pointer-events: auto; }
 
@@ -99,7 +97,7 @@
     box-shadow: 0 24px 70px rgba(0,0,0,.55);
     text-align: center;
     transform: translateY(14px) scale(.97);
-    transition: transform .5s cubic-bezier(.22,.8,.28,1);
+    transition: transform .35s cubic-bezier(.22,.8,.28,1);
 }
 .dsc-overlay.open .dsc-card { transform: none; }
 .dsc-card-small { width: min(340px, 100%); }
@@ -221,3 +219,7 @@
 @media (max-width: 600px) {
     .dsc-card { padding: 30px 18px 24px; }
 }
+
+/* Con una ventana abierta, las animaciones de fondo (estrellas, pétalos, etc.) se pausan
+   para que el navegador no tenga que repintar la página que ni se ve. */
+body.dsc-abierto *:not(.dsc-overlay):not(.dsc-overlay *) { animation-play-state: paused !important; }

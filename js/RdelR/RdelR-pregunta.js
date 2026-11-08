@@ -73,6 +73,7 @@
     const ts = Date.now();
     if (ms()) ms().save(new Date(ts));
     else { try { localStorage.setItem(KEY, String(ts)); } catch (e) {} }
+    if (window.Desbloqueos) Desbloqueos.registrar("nuestrafecha"); // queda en "Descubiertas"
     mostrarRespuesta(ts);
     lluvia();
   });

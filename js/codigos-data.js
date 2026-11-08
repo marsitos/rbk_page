@@ -11,3 +11,10 @@ const PUZZLE_CODES = {
     "13noviembre":   { destino: "puzzles/NuestraFecha.html",    nombre: "Nuestra fecha" }
     // "olarbk": la página Pregunta ya no existe (ahora la pregunta está dentro de RdelR), por eso se quitó este código.
 };
+
+// Páginas que se desbloquean jugando o visitándolas (no se escriben con código).
+// "etiqueta" es la frase que aparece en el menú en lugar del código.
+const PAGINAS_DESBLOQUEABLES = {
+    "interior":     { destino: "puzzles/Interior.html",     nombre: "Interior",      etiqueta: "desbloqueada con el puzzle" },
+    "nuestrafecha": { destino: "puzzles/NuestraFecha.html", nombre: "Nuestra fecha", etiqueta: "desde que dijiste que sí" }
+};

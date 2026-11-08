@@ -12,14 +12,28 @@
     function leer() {
         try {
             const datos = JSON.parse(localStorage.getItem(KEY));
-            // Si algún código se quita de codigos-data.js, simplemente deja de mostrarse
-            return Array.isArray(datos) ? datos.filter(d => d && existe(d.codigo)) : [];
+            // Si algún id se quita de codigos-data.js, simplemente deja de mostrarse
+            return Array.isArray(datos) ? datos.filter(d => d && buscar(d.codigo)) : [];
         } catch (_) { return []; }
     }
     function guardar(lista) {
         try { localStorage.setItem(KEY, JSON.stringify(lista)); } catch (_) { /* sin almacenamiento: se ignora */ }
     }
-    const existe = codigo => Object.prototype.hasOwnProperty.call(PUZZLE_CODES, codigo);
+    const hasOwn = (obj, k) => Object.prototype.hasOwnProperty.call(obj, k);
+    const existe = codigo => hasOwn(PUZZLE_CODES, codigo); // ¿es un código que se puede escribir?
+    const extras = typeof PAGINAS_DESBLOQUEABLES !== "undefined" ? PAGINAS_DESBLOQUEABLES : {};
+    const buscar = id => hasOwn(PUZZLE_CODES, id) ? PUZZLE_CODES[id] : (hasOwn(extras, id) ? extras[id] : null);
+
+    // Una misma página puede haberse desbloqueado de dos formas (con código y jugando): se muestra una sola vez
+    function unicas() {
+        const porDestino = new Map();
+        leer().forEach(d => {
+            const info = buscar(d.codigo), esCodigo = existe(d.codigo), previo = porDestino.get(info.destino);
+            if (!previo) porDestino.set(info.destino, { d, info, codigo: esCodigo ? d.codigo : null });
+            else if (esCodigo && !previo.codigo) previo.codigo = d.codigo;
+        });
+        return [...porDestino.values()];
+    }
 
     function registrar(codigo) {
         const lista = leer();
@@ -54,14 +68,17 @@
         overlay.classList.add("open");
         overlay.setAttribute("aria-hidden", "false");
         document.body.style.overflow = "hidden";
+        document.body.classList.add("dsc-abierto");
         if (enfocar) setTimeout(() => enfocar.focus(), 300);
     }
     function cerrar() {
         if (!abierta) return;
+        if (abierta.contains(document.activeElement)) document.activeElement.blur(); // el foco no puede quedar en algo oculto
         abierta.classList.remove("open");
         abierta.setAttribute("aria-hidden", "true");
         abierta = null;
         document.body.style.overflow = "";
+        document.body.classList.remove("dsc-abierto");
     }
     document.addEventListener("keydown", e => { if (e.key === "Escape") cerrar(); });
 
@@ -106,20 +123,19 @@
     // El botón "Descubiertas" solo aparece cuando ya hay algo desbloqueado
     function actualizarBoton() {
         if (!boton || !contenedor) return;
-        const items = leer();
+        const items = unicas();
         contenedor.hidden = items.length === 0;
         insignia.textContent = items.length ? "· " + items.length : "";
-        boton.classList.toggle("tiene-nuevas", items.some(d => !d.visto));
+        boton.classList.toggle("tiene-nuevas", leer().some(d => !d.visto));
     }
 
     function construirLista() {
-        const items = leer();
+        const items = unicas();
         lista.innerHTML = "";
         vacio.hidden = items.length > 0;
 
         let nuevas = 0;
-        items.forEach((d, i) => {
-            const info = PUZZLE_CODES[d.codigo];
+        items.forEach(({ d, info, codigo }, i) => {
             const li = document.createElement("li");
             li.className = "dsc-item";
 
@@ -132,7 +148,7 @@
                 '<span class="dsc-info"><span class="dsc-name"></span><span class="dsc-code"></span></span>' +
                 '<span class="dsc-go" aria-hidden="true">→</span>';
             a.querySelector(".dsc-name").textContent = info.nombre;
-            a.querySelector(".dsc-code").textContent = "código · " + d.codigo;
+            a.querySelector(".dsc-code").textContent = codigo ? "código · " + codigo : (info.etiqueta || "");
             li.appendChild(a);
             lista.appendChild(li);
 
@@ -150,8 +166,9 @@
         });
 
         // Ya se mostraron: la próxima vez aparecerán normales
-        if (items.some(d => !d.visto)) {
-            guardar(items.map(d => Object.assign({}, d, { visto: true })));
+        const todos = leer();
+        if (todos.some(d => !d.visto)) {
+            guardar(todos.map(d => Object.assign({}, d, { visto: true })));
             if (boton) boton.classList.remove("tiene-nuevas");
         }
     }
