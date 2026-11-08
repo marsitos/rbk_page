@@ -28,6 +28,11 @@ window.MomentoSi = (() => {
     }
   }
 
+  /** Borra el momento guardado en este dispositivo (se usa en el modo prueba). */
+  function clear() {
+    try { localStorage.removeItem(STORAGE_KEY); } catch (_) { /* se ignora */ }
+  }
+
   /** "13 · 11 · 2026" */
   const formatDate = d => `${pad(d.getDate())} · ${pad(d.getMonth() + 1)} · ${d.getFullYear()}`;
 
@@ -45,5 +50,5 @@ window.MomentoSi = (() => {
            `${offset >= 0 ? "+" : "-"}${pad(Math.floor(abs / 60))}:${pad(abs % 60)}`;
   }
 
-  return Object.freeze({ save, load, formatDate, formatTime, formatFull, toIsoWithOffset });
+  return Object.freeze({ save, load, clear, formatDate, formatTime, formatFull, toIsoWithOffset });
 })();

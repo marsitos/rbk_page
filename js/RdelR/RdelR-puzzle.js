@@ -6,13 +6,13 @@
   const CONFIG = {
     destino: "Interior.html",          // página que se abre al completar el puzzle
     objetivoGrados: -25,               // inclinación de los anillos que "encaja" (paralela a la franja de la Vía Láctea)
-    tolerancia: 3,                   // margen de error en grados
+    tolerancia: 2.5,                   // margen de error en grados
     segundosCarga: 2.4,                // cuánto hay que mantener el clic
     angulosOrbes: [180, -120, -60, 0], // posición de las 4 luces alrededor del planeta (grados)
     segundosPista: 6,                  // si no hace nada en este tiempo, aparece una pista
     pistas: [
-      "Los anillos buscan seguir el camino de la galaxia, alinealos con la vía…",
-      "Algo duerme en el centro. Mantén presionado.",
+      "Los anillos buscan seguir el camino de la galaxia…",
+      "Algo duerme en el centro. Mantén la presión.",
       "Sigue la luz… y repítela."
     ]
   };
@@ -162,19 +162,13 @@
     }
   });
 
-  // ----- Transición: entrar al planeta -----
+  // ----- Transición: viaje galáctico hacia el interior del planeta -----
   function sumergirse() {
     const r = sphere.getBoundingClientRect();
-    const S = r.width, cx = r.left + S / 2, cy = r.top + S / 2;
-    const ov = el("div", "fx-dive");
-    ov.style.cssText = "left:" + (cx - S / 2) + "px;top:" + (cy - S / 2) + "px;width:" + S + "px;height:" + S + "px;";
-    ov.style.setProperty("--k", Math.hypot(innerWidth, innerHeight) * 2.2 / S);
-    ov.appendChild(el("div", "fx-dive-fill"));
-    document.body.appendChild(ov);
+    const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
     document.body.classList.add("fx-diving");
-    requestAnimationFrame(() => requestAnimationFrame(() => ov.classList.add("go")));
-    setTimeout(() => ov.classList.add("solid"), 1750);
-    setTimeout(() => { location.href = CONFIG.destino; }, 2300);
+    const ir = () => { location.href = CONFIG.destino; };
+    if (window.FXViaje) FXViaje.iniciar(cx, cy, ir); else ir();
   }
 
   // ----- Inicio (con RdelR.html?paso=2 o ?paso=3 se puede saltar a un paso, útil para probar) -----

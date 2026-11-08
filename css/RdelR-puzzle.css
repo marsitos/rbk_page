@@ -52,13 +52,15 @@ body.fx-dragging { cursor: grabbing; user-select: none; -webkit-user-select: non
 .fx-orbs.on .fx-orb.bad { animation: fxBad .5s ease; box-shadow: 0 0 18px 6px rgba(255,122,168,.85); }
 @keyframes fxBad { 0%,100% { transform: translateX(0) scale(1); } 25% { transform: translateX(-6px) scale(1); } 75% { transform: translateX(6px) scale(1); } }
 
-/* Transición: entrar al planeta */
-.fx-dive {
-    position: fixed; z-index: 900; border-radius: 50%; pointer-events: none; opacity: 0; will-change: transform;
-    background: radial-gradient(circle at 34% 30%, #E9B0F2, #BA55D3 40%, #7A2F8F 100%);
-    transition: transform 1.9s cubic-bezier(.6, 0, .9, .4), opacity .5s ease;
+/* Transición: viaje galáctico (se dibuja desde js/RdelR-viaje.js) */
+.fx-warp-blur {
+    position: fixed; inset: 0; z-index: 890; pointer-events: none;
+    background: rgba(8, 4, 16, 0);
+    -webkit-backdrop-filter: blur(0); backdrop-filter: blur(0);
+    transition: backdrop-filter 1.8s ease, -webkit-backdrop-filter 1.8s ease, background 1.8s ease;
 }
-.fx-dive.go { transform: scale(var(--k)); opacity: 1; }
-.fx-dive-fill { position: absolute; inset: 0; border-radius: 50%; background: #BA55D3; opacity: 0; transition: opacity .45s ease; }
-.fx-dive.solid .fx-dive-fill { opacity: 1; }
+.fx-warp-blur.on { background: rgba(8, 4, 16, .55); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.fx-warp { position: fixed; inset: 0; z-index: 900; pointer-events: none; }
+.fx-warp-flash { position: fixed; inset: 0; z-index: 910; pointer-events: none; background: #BA55D3; opacity: 0; transition: opacity .5s ease; }
+.fx-warp-flash.on { opacity: 1; }
 body.fx-diving { overflow: hidden; }

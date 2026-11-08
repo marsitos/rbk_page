@@ -44,81 +44,8 @@ function initAmbientStars() {
 
 }
 
-// =========================
-// PUZZLE: CÓDIGO -> PÁGINA
-// =========================
-//
-// Cada código lleva a una página dentro del proyecto.
-const PUZZLE_CODES = {
-    "rdelrjeje": "puzzles/RdelR.html",
-    "cocolon": "puzzles/YoPaTi.html",
-    "citasgg": "puzzles/CitasPlaneadas.html",
-    "recuerdos": "https://drive.google.com/drive/folders/1oWHLIezeag-UPwRhGHqrDzCS1WmvJGU4?usp=sharing",
-    "nuestrosmeses": "puzzles/NuestrosMeses.html",
-    "palabras": "puzzles/Carta.html",
-    "olarbk": "puzzles/Pregunta.html",
-    "13noviembre": "puzzles/NuestraFecha.html",
-    // "otrocodigo": "puzzles/puzzle2.html",
-};
-
-function initPuzzle() {
-
-    const toggle = document.getElementById("puzzleToggle");
-    const panel = document.getElementById("puzzlePanel");
-    const form = document.getElementById("puzzleForm");
-    const input = document.getElementById("puzzleInput");
-    const feedback = document.getElementById("puzzleFeedback");
-
-    if (!toggle || !panel || !form || !input || !feedback) return;
-
-    toggle.addEventListener("click", () => {
-
-        const willOpen = !panel.classList.contains("open");
-
-        panel.classList.toggle("open", willOpen);
-        panel.setAttribute("aria-hidden", String(!willOpen));
-        toggle.setAttribute("aria-expanded", String(willOpen));
-
-        if (willOpen) {
-            setTimeout(() => input.focus(), 300);
-        } else {
-            feedback.textContent = "";
-            feedback.className = "puzzle-feedback";
-            form.reset();
-        }
-
-    });
-
-    form.addEventListener("submit", (event) => {
-
-        event.preventDefault();
-
-        const code = input.value.trim().toLowerCase();
-        const destination = PUZZLE_CODES[code];
-
-        if (!code) return;
-
-        if (destination) {
-
-            feedback.textContent = "✧ es ese... un momento";
-            feedback.className = "puzzle-feedback visible success";
-
-            setTimeout(() => {
-                window.location.href = destination;
-            }, 650);
-
-        } else {
-
-            feedback.textContent = "ese código todavía no es válido";
-            feedback.className = "puzzle-feedback visible error";
-            input.classList.add("shake");
-            setTimeout(() => input.classList.remove("shake"), 400);
-
-        }
-
-    });
-
-}
+// Los códigos, la ventana de código rápido y el menú "Desbloqueados"
+// ahora viven en js/codigos-data.js y js/codigos.js.
 
 // =========================
 // CONTADOR DINÁMICO
@@ -202,7 +129,6 @@ function initCounter() {
 }
 
 initAmbientStars();
-initPuzzle();
 initCounter();
 initHeartHunt();
 

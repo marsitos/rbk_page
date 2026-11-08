@@ -42,6 +42,7 @@
     document.head.appendChild(css2);
     cargarScript("RdelR-viaLactea.js")
       .then(() => cargarScript("RdelR-planeta.js"))
+      .then(() => cargarScript("RdelR-viaje.js"))
       .then(() => cargarScript("RdelR-puzzle.js"))
       .then(() => {
         // El título espera a que termine la entrada: se reinicia su animación con retraso

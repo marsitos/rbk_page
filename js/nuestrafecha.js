@@ -120,7 +120,7 @@ function savedStart() {
   const fromUrl = !!raw;
   if (!raw) { try { raw = localStorage.getItem("respuestaSi"); } catch (e) {} }
   const ts = Number(raw);
-  if (!ts || ts < DEFAULT_START.getTime()) return null;
+  if (!ts) return null;//cambiado
   if (fromUrl) { try { localStorage.setItem("respuestaSi", String(ts)); } catch (e) {} }
   return new Date(ts);
 }

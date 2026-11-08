@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Para Cocolón ♡</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/descubiertas.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -61,6 +62,11 @@
                 Descubrir
                 <span>↓</span>
             </button>
+            <div class="quick-code-wrap">
+                <button type="button" id="quickCodeToggle" class="quick-code-toggle">
+                    <span>🗝️</span> tengo un código
+                </button>
+            </div>
         </div>
     </main>
 
@@ -118,6 +124,11 @@
                     conocernos un poco más cada vez, aprender cosas nuevas,
                     aprender a acostumbrarnos y a tenernos cerca.
                 </p>
+                <div class="discovered-wrap" id="discoveredWrap" hidden>
+                    <button type="button" id="discoveredToggle" class="discovered-toggle" aria-haspopup="dialog">
+                        <span class="discovered-icon">✧</span> Descubiertas <span id="discoveredBadge"></span>
+                    </button>
+                </div>
             </div>
         </section>
 
@@ -384,6 +395,34 @@
         </section>
 
     </div>
+    <!-- CÓDIGO RÁPIDO (desde la intro) -->
+    <div class="dsc-overlay" id="quickOverlay" role="dialog" aria-modal="true" aria-labelledby="quickTitle" aria-hidden="true">
+        <div class="dsc-card dsc-card-small">
+            <button type="button" class="dsc-x" id="quickClose" aria-label="Cerrar">✕</button>
+            <span class="section-label" id="quickTitle">código</span>
+            <form id="quickForm" class="dsc-form" autocomplete="off">
+                <input type="text" id="quickInput" class="puzzle-input" placeholder="escribe el código"
+                    maxlength="30" autocomplete="off" spellcheck="false" aria-label="Código">
+                <button type="submit" class="puzzle-submit" aria-label="Entrar">→</button>
+            </form>
+            <p class="puzzle-feedback" id="quickFeedback" aria-live="polite"></p>
+            <button type="button" class="dsc-link" id="quickToList" hidden>ver lo que ya descubriste</button>
+        </div>
+    </div>
+
+    <!-- DESBLOQUEADOS -->
+    <div class="dsc-overlay" id="discoveredOverlay" role="dialog" aria-modal="true" aria-labelledby="discoveredTitle" aria-hidden="true">
+        <div class="dsc-card">
+            <button type="button" class="dsc-x" id="discoveredClose" aria-label="Cerrar">✕</button>
+            <span class="section-label" id="discoveredTitle">Desbloqueados</span>
+            <h3 class="dsc-title">Lo que ya encontraste</h3>
+            <ul class="dsc-list" id="discoveredList"></ul>
+            <p class="dsc-empty" id="discoveredEmpty">Todavía no hay nada aquí. Cada código que escribas se guarda y aparece en este lugar.</p>
+        </div>
+    </div>
+
+    <script src="js/codigos-data.js"></script>
+    <script src="js/codigos.js"></script>
     <script src="js/script.js"></script>
 </body>
 
