@@ -4,26 +4,26 @@
 // Mensajes de las 4 primeras estrellas (la quinta es la pregunta).
 // Son borradores: reemplázalos por tus propias palabras.
 const VIRGO_TEXTOS = [
-  "Hay galaxias tan lejos que su luz tarda millones de años en llegar. La tuya, en cambio, llegó justo a tiempo.",
-  "Las mariposas aparecen sin avisar y lo cambian todo, aunque ellas ni lo sepan. Así llegaste tú a mis días.",
-  "Los girasoles siempre buscan la luz. Y yo, sin darme cuenta, siempre termino buscándote a ti.",
-  "Hoy cumplimos seis meses, y hoy también reconocen tu esfuerzo con un diploma por excelencia académica. Estoy muy orgulloso de ti."
+  "Hay estrellas que son dificiles de ver y encontrar en el espacio, pero el tiempo premia la paciencia",
+  "A veces llegué a sentir que en un universo tan grande y con tantas estrellas no podría encontrar una que me gustara tanto, sentirme tan a gusto teniendo la seguridad de que siempre estará conmigo, que yo podré contemplarla y adorarla.",
+  "En estos textos, reflejo lo que siento, lo que me haces sentir, ya que siempre serás mi galaxia.",
+  "Hoy, que cumplimos seis meses, y mañana reconocerán tu esfuerzo con un diploma por excelencia académica. Estoy muy orgulloso de ti. Hoy también que es un día especial, considero que el viernes 13 es una fecha bonita aunque por ahí dicen que el 13 es un numero de mala suerte, me gustaría cambiar esa idea errónea y hacer las cosas bien contigo como lo hemos estado haciendo desde que nos conocimos."
 ];
 
 // Última estrella
 const PREGUNTA = {
-  icono: "🌻",
-  intro: "Esta última estrella guarda lo que quería preguntarte, mirándote.",
-  titulo: "¿Quieres ser mi novia?",
+  icono: "🌠",
+  intro: "Si pudiera pedirle un deseo a esta última estrella fugaz, sería seguir compartiendo mi vida contigo, descubrir todo lo que nos espera siendo una pareja, me gustaría ser tu novio.",
+  titulo: "¿Aceptas?",
   // Frases que salen cada vez que intenta tocar el "No" (la última se queda fija)
   noMensajes: [
     "Mmm…………",
     "¿Segura? Mira que no se deja jeje.",
-    "Se escapó otra vez....",
-    "No es tan fácil tocar el No...",
+    "Se jue otra vez....",
+    "Ta feita esa palabra...",
     "Me odias....",
     "ME ODIAS INFINITAMENTE",
-    "JUMMM",
+    "😭😭",
     "Listo, voy entendiendo el mensaje……",
     "Okei, no hay problema chau",
     "Ya la siguiente que lo aplastes queda, tranquila.",
@@ -44,8 +44,8 @@ const PREGUNTA = {
 const RESPUESTA = {
   modoPrueba: true,
   clave: "respuestaSi",                    // nombre con el que se guarda la hora (NuestraFecha la lee)
-  eyebrow: "Desde hoy",
-  titulo: "Gracias por decir que sí.",
+  eyebrow: "Bechito",
+  titulo: "Desde hoy, hasta siempre.",
   etiquetaHora: "Tu sí quedó registrado el",
   palabras: "Desde hoy, esto es nuestro.\nSeis meses para llegar hasta aquí, y todo lo que falta.",
   cta: "Ver nuestra fecha →",
@@ -61,6 +61,6 @@ const TELESCOPIO = {
   pistaScroll: "desliza ↓",
   pistaTelescopio: "toca el telescopio",
   pistaArrastrar: "arrastra para mirar el cielo",
-  salir: "✕ salir",
+  salir: "✖️ salir",
   segundosPista: 6   // segundos sin encontrar una estrella para que aparezca la indicación discreta
 };

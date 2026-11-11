@@ -370,3 +370,26 @@ body.RdelR-page {
 @keyframes rainUp { 0% { transform: translateY(0) rotate(0); opacity: 1; } 100% { transform: translateY(-115vh) rotate(25deg); opacity: 0; } }
 
 @media (prefers-reduced-motion: reduce) { .butterflies { display: none; } .q-no.fleeing, #yes { transition: none; } }
+
+/* ================================
+   LA PREGUNTA POR PARTES
+   estrella → frase → pregunta (js/RdelR/RdelR-pregunta-partes.js)
+================================ */
+
+.q-aparece { animation: fadeUp .9s ease both; }
+
+/* Mientras falta una parte, toda la tarjeta invita a tocar */
+#question[data-paso="1"], #question[data-paso="2"] { cursor: pointer; }
+.q-icon { transition: font-size .6s ease; }
+#question[data-paso="1"] .q-icon {
+    font-size: 3.4rem; filter: drop-shadow(0 0 14px rgba(233, 176, 242, .7));
+    animation: qPulso 2.2s ease-in-out infinite;
+}
+@keyframes qPulso { 0%, 100% { transform: scale(1); opacity: .75; } 50% { transform: scale(1.15); opacity: 1; } }
+
+/* Flechita para seguir después de la frase */
+.q-next {
+    display: block; margin: -.3rem auto 0; padding: .2rem .8rem; border: 0; background: none; color: #fff;
+    font-size: 1.7rem; line-height: 1; cursor: pointer; animation: qBaja 1.8s ease-in-out infinite;
+}
+@keyframes qBaja { 0%, 100% { transform: translateY(0); opacity: .35; } 50% { transform: translateY(6px); opacity: .9; } }

@@ -1,7 +1,5 @@
 /**
  * Momento exacto en que se presionó "Sí".
- * Lo comparten la página de la pregunta (que lo guarda) y "Nuestra fecha" (que lo lee).
- * Cargar este archivo ANTES de pregunta.js y de nuestrafecha.js.
  */
 window.MomentoSi = (() => {
   "use strict";

@@ -4,7 +4,7 @@
 (function () {
   const CONFIG = {
     archivo: "../../assets/audios/gongoli.mp3", // misma canción de antes (ruta relativa a la página)
-    volumen: 0.22,                   // 0 a 1 (antes sonaba a 0.7)
+    volumen: 0.17,                   // 0 a 1 (antes sonaba a 0.7)
     fundidoMs: 3000                  // duración del fundido de entrada
   };
 

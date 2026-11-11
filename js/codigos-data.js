@@ -9,7 +9,6 @@ const PUZZLE_CODES = {
     "nuestrosmeses": { destino: "puzzles/NuestrosMeses.html",   nombre: "Nuestros meses" },
     "palabras":      { destino: "puzzles/Carta.html",           nombre: "Carta" },
     "13noviembre":   { destino: "puzzles/NuestraFecha.html",    nombre: "Nuestra fecha" }
-    // "olarbk": la página Pregunta ya no existe (ahora la pregunta está dentro de RdelR), por eso se quitó este código.
 };
 
 // Páginas que se desbloquean jugando o visitándolas (no se escriben con código).
