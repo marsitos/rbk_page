@@ -84,8 +84,18 @@ function getElapsedBreakdown(start, now) {
         years -= 1;
     }
 
-    const weeks = Math.floor(days / 7);
-    days = days % 7;
+    // Semanas ajustadas al mes: cada mes se reparte en 4 semanas, tenga 28, 29, 30 o 31 días.
+    // Las semanas van de 0 a 3 y se reinician en cada mesversario; los días sueltos van de 0 a 7.
+    // (No es exacto al día de 7 en 7, a propósito: así nunca aparece "4 semanas" antes de cumplir el mes.)
+    const meses = years * 12 + months;
+    const ultimo = new Date(start.getFullYear(), start.getMonth() + meses, start.getDate());
+    const proximo = new Date(start.getFullYear(), start.getMonth() + meses + 1, start.getDate());
+    const largoMes = Math.round((proximo - ultimo) / 86400000);           // 28, 29, 30 o 31
+    const inicioSemana = k => Math.round(k * largoMes / 4);               // día en que arranca cada semana
+
+    let weeks = 3;
+    while (weeks > 0 && days < inicioSemana(weeks)) weeks--;
+    days = days - inicioSemana(weeks);
 
     return { years, months, weeks, days, hours, minutes, seconds };
 

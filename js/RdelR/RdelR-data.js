@@ -52,3 +52,15 @@ const RESPUESTA = {
   ctaHref: "NuestraFecha.html",
   emojis: ["🦋", "🌻", "✦", "💜"]           // lluvia que cae al decir que sí
 };
+
+
+// ===== TELESCOPIO =====
+// Indicaciones del recorrido: scroll, telescopio y visor. (Los párrafos son VIRGO_TEXTOS, arriba:
+// salen en ese orden sin importar qué estrella toque primero. La última luz es la pregunta.)
+const TELESCOPIO = {
+  pistaScroll: "desliza ↓",
+  pistaTelescopio: "toca el telescopio",
+  pistaArrastrar: "arrastra para mirar el cielo",
+  salir: "✕ salir",
+  segundosPista: 6   // segundos sin encontrar una estrella para que aparezca la indicación discreta
+};

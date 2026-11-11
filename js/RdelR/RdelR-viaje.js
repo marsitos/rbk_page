@@ -1,11 +1,17 @@
 // ===== Viaje galáctico: transición al entrar en el planeta =====
 // El fondo se desenfoca, aparecen estrellas que se estiran y salen disparadas desde el planeta
 // (como un salto a velocidad luz), una luz lo inunda todo y se abre la nueva página.
-window.FXViaje = (function () {
+// También se puede usar SIN cambiar de página (como el viaje de cada estrella del telescopio):
+//   FXViaje.iniciar(x, y, alTerminar, { duracion: 1.8, quitar: true })
+//   duracion: segundos que dura el viaje (por defecto 2.7)
+//   quitar:   al terminar, la luz se desvanece y el efecto se retira de la pantalla
+window.FXViaje = window.FXViaje || (function () {
   const DURACION = 2.7;              // segundos hasta que se abre la página
   const COLORES = ["255,255,255", "255,255,255", "200,185,255", "233,176,242", "186,85,211"];
 
-  function iniciar(cx, cy, alTerminar) {
+  function iniciar(cx, cy, alTerminar, opciones) {
+    const DUR = (opciones && opciones.duracion) || DURACION;
+    const quitar = !!(opciones && opciones.quitar);
     const W = innerWidth, H = innerHeight;
     const maxR = Math.hypot(W, H);
 
@@ -34,10 +40,10 @@ window.FXViaje = (function () {
     function cuadro(now) {
       const t = (now - t0) / 1000;
       const dt = Math.min((now - prev) / 1000, 0.05); prev = now;
-      const k = Math.min(t / (DURACION - 0.6), 1);
+      const k = Math.min(t / (DUR * 0.78), 1);
       const aceleracion = 0.15 + 7 * k * k * k;           // empieza lento y se dispara
       // El centro del viaje pasa del planeta al centro de la pantalla
-      const e = Math.min(t / 1.4, 1), ease = e * e * (3 - 2 * e);
+      const e = Math.min(t / (DUR * 0.52), 1), ease = e * e * (3 - 2 * e);
       const ox = cx + (W / 2 - cx) * ease, oy = cy + (H / 2 - cy) * ease;
 
       ctx.clearRect(0, 0, W, H);
@@ -59,7 +65,7 @@ window.FXViaje = (function () {
       }
 
       // Resplandor del núcleo que crece hasta inundar la pantalla
-      const g = Math.max(0, (t - 1.3) / (DURACION - 1.3));
+      const g = Math.max(0, (t - DUR * 0.48) / (DUR * 0.52));
       const radio = 60 + g * g * maxR * 1.1;
       const grad = ctx.createRadialGradient(ox, oy, 0, ox, oy, radio);
       grad.addColorStop(0, "rgba(255,240,255," + Math.min(1, 0.25 + g * 1.2) + ")");
@@ -68,9 +74,21 @@ window.FXViaje = (function () {
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, W, H);
 
-      if (t > DURACION - 0.55) flash.classList.add("on"); // se funde con el color de la nueva página
-      if (t >= DURACION) {
-        if (!terminado) { terminado = true; if (alTerminar) alTerminar(); }
+      if (t > DUR - Math.min(0.55, DUR * 0.2)) flash.classList.add("on"); // se funde con el color de la nueva página
+      if (t >= DUR) {
+        if (!terminado) {
+          terminado = true;
+          if (alTerminar) alTerminar();
+          if (quitar) {
+            // La luz se desvanece (dejando ver lo que apareció debajo) y todo se retira
+            setTimeout(() => {
+              flash.classList.remove("on");
+              blur.style.transition = cv.style.transition = "opacity .6s ease";
+              blur.style.opacity = cv.style.opacity = "0";
+              setTimeout(() => { blur.remove(); cv.remove(); flash.remove(); }, 750);
+            }, 120);
+          }
+        }
         return;
       }
       requestAnimationFrame(cuadro);

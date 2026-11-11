@@ -9,10 +9,10 @@
     tolerancia: 2.5,                   // margen de error en grados
     segundosCarga: 2.4,                // cuánto hay que mantener el clic
     angulosOrbes: [180, -120, -60, 0], // posición de las 4 luces alrededor del planeta (grados)
-    segundosPista: 6,                  // si no hace nada en este tiempo, aparece una pista
+    segundosPista: 10,                  // si no hace nada en este tiempo, aparece una pista
     pistas: [
-      "Los anillos buscan seguir el camino de la galaxia…",
-      "Algo duerme en el centro. Mantén la presión.",
+      "Los anillos buscan seguir el camino de la galaxia, alinealo con la vía…",
+      "Algo queda en el centro. Mantén presionado.",
       "Sigue la luz… y repítela."
     ]
   };
