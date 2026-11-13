@@ -7,8 +7,14 @@
 <link rel="stylesheet" href="shared.css">
 <link rel="stylesheet" href="../css/nuestrafecha.css">
 </head>
-<body class="t-rose" data-desbloquea="nuestrafecha">
 
+<body class="t-rose" data-desbloquea="nuestrafecha">
+<audio id="musicaFondo" loop preload="auto">
+    <source src="../assets/audios/gongoli.mp3" type="audio/mpeg">
+</audio>
+<button id="btnMusica" class="btn-musica" aria-label="Reproducir música">
+    ♫
+</button>
 <div class="collage" id="collage" aria-hidden="true"></div>
 <div class="veil"></div>
 
@@ -27,6 +33,50 @@
 <p class="big rv">Y lo que falta.</p>
 </div>
 
+<script>
+    const musica = document.getElementById("musicaFondo");
+    const btnMusica = document.getElementById("btnMusica");
+
+    musica.volume = 0.17;
+
+    let musicaIniciada = false;
+
+    function iniciarMusica() {
+        if (musicaIniciada) return;
+
+        musica.play()
+            .then(() => {
+                musicaIniciada = true;
+                btnMusica.textContent = "♫";
+                btnMusica.classList.add("reproduciendo");
+            })
+            .catch(error => {
+                console.log("Esperando interacción para reproducir música.");
+            });
+    }
+
+    // Intentar reproducir al entrar
+    iniciarMusica();
+
+    // Activar al primer toque o clic en cualquier parte
+    document.addEventListener("click", iniciarMusica, { once: true });
+    document.addEventListener("touchstart", iniciarMusica, { once: true });
+
+    // Botón para pausar o reanudar
+    btnMusica.addEventListener("click", (e) => {
+        e.stopPropagation();
+
+        if (musica.paused) {
+            musica.play();
+            btnMusica.textContent = "♫";
+            btnMusica.classList.add("reproduciendo");
+        } else {
+            musica.pause();
+            btnMusica.textContent = "♪";
+            btnMusica.classList.remove("reproduciendo");
+        }
+    });
+</script>
 <script src="shared.js"></script>
 <script src="../js/momento-si.js"></script>
 <script src="../js/nuestrafecha.js"></script>

@@ -13,7 +13,7 @@ const VIRGO_TEXTOS = [
 // Última estrella
 const PREGUNTA = {
   icono: "🌠",
-  intro: "Si pudiera pedirle un deseo a esta última estrella fugaz, sería seguir compartiendo mi vida contigo, descubrir todo lo que nos espera siendo una pareja, me gustaría ser tu novio.",
+  intro: "Si pudiera pedirle un deseo a esta última estrella fugaz, sería seguir compartiendo mi vida contigo, descubrir todo lo que nos espera juntos. Tengo atorado hace un buen tiempo esto pero no encontraba una buena fecha, hasta que caí en cuenta que cumplimos seis meses y sería bonito. Me gustaría dar el paso, dejar de imaginar como sería y empezar a construirlo. Me gustaría ser tu novio, Rebeca.",
   titulo: "¿Aceptas?",
   // Frases que salen cada vez que intenta tocar el "No" (la última se queda fija)
   noMensajes: [

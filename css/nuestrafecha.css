@@ -28,3 +28,39 @@ body { background: #170E15; }
     .lead { color: #E6D3D8; }
 
     @media (prefers-reduced-motion: reduce) { .track { animation: none; } }
+
+    /* ===== Botón de música: ♫ ===== */
+    .btn-musica {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.4);
+    background: rgba(255,255,255,0.15);
+    color: white;
+    font-size: 23px;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
+
+.btn-musica:hover {
+    transform: scale(1.1);
+    background: rgba(255,255,255,0.3);
+}
+
+.btn-musica.reproduciendo {
+    animation: pulsoMusica 2s infinite;
+}
+
+@keyframes pulsoMusica {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgba(255,255,255,0.3);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(255,255,255,0);
+    }
+}

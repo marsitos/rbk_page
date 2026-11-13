@@ -90,35 +90,123 @@ res.addEventListener("click", e => { const b = e.target.closest("button"); if (b
 clr.onclick = () => { q.value = ""; search(); q.focus(); };
 document.addEventListener("click", e => { if (!e.target.closest(".search")) res.style.display = "none"; });
 
-// ----- Menú de historia -----
+// ----- Menú de historia: se abre como una carta -----
 const story = $("story"), sbody = $("sbody"), bars = $("bars"), sbox = $("sbox");
 let si = 0, sp = 0;
-function openStory(i) {
-  si = i; sp = 0;
-  sbox.style.setProperty("--h", MONTHS[i].h);
-  bars.innerHTML = MONTHS[i].pages.map(() => "<span></span>").join("");
-  story.classList.add("show"); story.setAttribute("aria-hidden", "false");
+
+// Ajustes: cuánto dura cada página (según el largo del texto) y los tiempos de apertura de la carta (ms)
+const STORY = { baseMs: 3800, perChar: 45, minMs: 4500, maxMs: 12000, openMs: [500, 1300] };
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+story.querySelector(".hint").textContent = "toca para avanzar · mantén para pausar · Esc para cerrar";
+
+// Sobre con sello (se dibuja con CSS; el color sale del tono del mes)
+const env = document.createElement("div");
+env.className = "env"; env.setAttribute("aria-hidden", "true");
+env.innerHTML = '<div class="env-body"></div><div class="env-l"></div><div class="env-r"></div><div class="env-b"></div><div class="env-flap"></div><div class="env-seal">♥</div>';
+story.insertBefore(env, sbox);
+
+let opening = false, openTimers = [], paused = false, swallow = false, holdTimer = 0;
+const clearOpen = () => { openTimers.forEach(clearTimeout); openTimers = []; };
+function setPaused(v) { paused = v; sbox.classList.toggle("paused", v); }
+
+function finishOpen() {          // el sobre ya se abrió: empieza la lectura
+  clearOpen();
+  if (!opening) return;
+  opening = false;
+  env.classList.add("broke");
+  story.classList.remove("opening"); story.classList.add("opened");
   render();
 }
+
+function openStory(i) {
+  si = i; sp = 0; clearOpen(); setPaused(false);
+  story.style.setProperty("--h", MONTHS[i].h);
+  sbox.style.setProperty("--h", MONTHS[i].h);
+  bars.innerHTML = MONTHS[i].pages.map(() => "<span></span>").join("");
+  sbody.innerHTML = "";
+  env.classList.remove("broke");
+  story.classList.add("show"); story.setAttribute("aria-hidden", "false");
+  opening = true;
+  if (reduceMotion) { finishOpen(); return; }
+  story.classList.remove("opened"); story.classList.add("opening");
+  openTimers.push(setTimeout(() => env.classList.add("broke"), STORY.openMs[0]), setTimeout(finishOpen, STORY.openMs[1]));
+}
+
+// ----- Diseño de cada página: polaroid, foto completa o frase (se puede forzar con "layout" en meses-data.js) -----
+function layoutOf(o, k) {
+  const p = o.pages[k];
+  if (p.layout) return p.layout;
+  if (!p.img) return "quote";
+  return o.pages.slice(0, k).filter(x => x.img).length % 2 === 0 ? "polaroid" : "full";
+}
+
+const pageMs = p => Math.min(STORY.maxMs, Math.max(STORY.minMs, STORY.baseMs + String(p.txt).replace(/<[^>]*>/g, "").length * STORY.perChar));
+
+// El texto aparece palabra por palabra (si trae HTML, se muestra tal cual)
+function revealText(txt) {
+  if (/[<&]/.test(txt)) return txt;
+  const words = String(txt).split(/\s+/).filter(Boolean), gap = Math.min(0.07, 1.9 / Math.max(words.length, 1));
+  return words.map((w, k) => '<span class="w" style="animation-delay:' + (0.25 + k * gap).toFixed(2) + 's">' + w + "</span>").join(" ");
+}
+
 function render() {
-  const o = MONTHS[si], p = o.pages[sp], last = sp === o.pages.length - 1;
-  [...bars.children].forEach((b, k) => b.classList.toggle("done", k <= sp));
+  const o = MONTHS[si], p = o.pages[sp], last = sp === o.pages.length - 1, lay = layoutOf(o, sp);
+
+  // Barras: las anteriores llenas y la actual se llena sola (al terminar pasa a la siguiente página)
+  [...bars.children].forEach((b, k) => { b.className = k < sp ? "done" : ""; });
+  void bars.offsetWidth;
+  const cur = bars.children[sp];
+  cur.style.setProperty("--dur", pageMs(p) + "ms");
+  cur.classList.add("cur");
+
+  sbody.className = "sbody lay-" + lay;
+  sbody.dataset.n = "0" + (si + 1);
   sbody.style.animation = "none"; void sbody.offsetWidth; sbody.style.animation = "";
   sbody.innerHTML = "<small>" + o.m + " " + o.y + " · " + o.cat + "</small>" +
-    (p.img ? '<img alt="" src="' + FOLDER + p.img + '" onerror="this.remove()">' : "") +
-    "<p>" + p.txt + "</p>" +
+    (p.img ? '<img alt="" src="' + FOLDER + p.img + '" onerror="this.parentNode.classList.add(\'nofoto\');this.remove()">' : "") +
+    "<p>" + revealText(p.txt) + "</p>" +
     (last ? '<button class="cta" id="cta">' + (si < MONTHS.length - 1 ? "Siguiente mes ↓" : "Y hoy, seis meses ♡") + "</button>" : "");
   if (last) {
-    if (!seen.includes(si)) { seen.push(si); try { localStorage.setItem("seismeses_seen", JSON.stringify(seen)); } catch (e) {} paint(); }
+    if (!seen.includes(si)) { seen.push(si); try { localStorage.setItem("seismeses_seen", JSON.stringify(seen)); } catch (e) {} paint(); updateHeart(); }
     $("cta").onclick = () => { closeStory(); goSec(secs[si + 2]); };
   }
 }
-function step(d) { const n = sp + d; if (n < 0 || n >= MONTHS[si].pages.length) return; sp = n; render(); }
-function closeStory() { story.classList.remove("show"); story.setAttribute("aria-hidden", "true"); }
-$("tr").onclick = () => step(1);
-$("tl").onclick = () => step(-1);
+
+function step(d) { if (opening) return; const n = sp + d; if (n < 0 || n >= MONTHS[si].pages.length) return; sp = n; render(); }
+function closeStory() { clearOpen(); opening = false; setPaused(false); story.classList.remove("show", "opening", "opened"); story.setAttribute("aria-hidden", "true"); }
+
+// La barra actual terminó: pasa sola a la siguiente página (en la última se queda esperando el botón)
+bars.addEventListener("animationend", e => { if (e.animationName === "barFill" && sp < MONTHS[si].pages.length - 1) step(1); });
+
+// Mantener el dedo (o el clic) pausa; un toque corto avanza o retrocede
+[$("tl"), $("tr")].forEach(b => {
+  b.addEventListener("pointerdown", () => { swallow = false; clearTimeout(holdTimer); holdTimer = setTimeout(() => { setPaused(true); swallow = true; }, 230); });
+  const soltar = () => { clearTimeout(holdTimer); if (paused) setPaused(false); };
+  ["pointerup", "pointerleave", "pointercancel"].forEach(ev => b.addEventListener(ev, soltar));
+});
+$("tr").onclick = () => { if (swallow) { swallow = false; return; } step(1); };
+$("tl").onclick = () => { if (swallow) { swallow = false; return; } step(-1); };
 $("sx").onclick = closeStory;
-story.addEventListener("click", e => { if (e.target === story) closeStory(); });
+document.addEventListener("visibilitychange", () => { if (document.hidden && story.classList.contains("show")) setPaused(true); else if (!document.hidden) setPaused(false); });
+story.addEventListener("click", e => { if (opening) { finishOpen(); return; } if (e.target === story) closeStory(); });
+
+// ----- Cierre: seis luces que se unen y forman un corazón -----
+const HEART = [[50, 34], [27, 20], [16, 46], [50, 84], [84, 46], [73, 20]].slice(0, MONTHS.length);
+const outro = secs[secs.length - 1];
+(function buildHeart() {
+  const box = document.createElement("div");
+  box.className = "mheart";
+  box.innerHTML = '<svg viewBox="0 0 100 94" aria-hidden="true"><polygon class="hl" pathLength="1" points="' + HEART.map(p => p.join(",")).join(" ") + '"/>' +
+    HEART.map(p => '<circle class="hd" cx="' + p[0] + '" cy="' + p[1] + '" r="3.2"/>').join("") + '</svg><p class="hmsg"></p>';
+  outro.insertBefore(box, outro.firstChild);
+})();
+function updateHeart() {
+  outro.querySelectorAll(".hd").forEach((d, k) => d.classList.toggle("on", seen.includes(k)));
+  const faltan = MONTHS.length - MONTHS.filter((_, k) => seen.includes(k)).length;
+  outro.classList.toggle("complete", faltan === 0);
+  outro.querySelector(".hmsg").textContent = faltan === 0 ? "" : faltan === 1 ? "te falta 1 historia por abrir" : "te faltan " + faltan + " historias por abrir";
+}
+updateHeart();
 document.addEventListener("keydown", e => {
   if (story.classList.contains("show")) {
     if (e.key === "Escape") closeStory();

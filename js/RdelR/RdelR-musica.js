@@ -3,7 +3,7 @@
 // Aparece un botón ♪ para silenciarla. Se pausa sola si la pestaña queda oculta.
 (function () {
   const CONFIG = {
-    archivo: "../../assets/audios/gongoli.mp3", // misma canción de antes (ruta relativa a la página)
+    archivo: "../../assets/audios/galaxy.mp3", // misma canción de antes (ruta relativa a la página)
     volumen: 0.17,                   // 0 a 1 (antes sonaba a 0.7)
     fundidoMs: 3000                  // duración del fundido de entrada
   };
