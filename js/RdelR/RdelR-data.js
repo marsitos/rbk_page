@@ -42,7 +42,7 @@ const PREGUNTA = {
 
 // Lo que aparece después de decir que sí
 const RESPUESTA = {
-  modoPrueba: true,
+  modoPrueba: false,
   clave: "respuestaSi",                    // nombre con el que se guarda la hora (NuestraFecha la lee)
   eyebrow: "Bechito",
   titulo: "Desde hoy, hasta siempre.",
