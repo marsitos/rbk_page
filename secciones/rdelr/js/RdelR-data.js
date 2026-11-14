@@ -42,7 +42,7 @@ const PREGUNTA = {
 
 // Lo que aparece después de decir que sí
 const RESPUESTA = {
-  modoPrueba: false,
+  modoPrueba: true,  // si es true, no se muestra la fecha ni el botón de ir a nuestra-fecha
   fecha: "2026-11-13T16:04:43-05:00",      // momento exacto del sí (viernes 13/11/2026, hora de Ecuador)
   eyebrow: "Bechito",
   titulo: "Desde hoy, hasta siempre.",
