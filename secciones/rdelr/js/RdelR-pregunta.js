@@ -8,26 +8,14 @@
   const yes = document.getElementById("yes");
   const no = document.getElementById("no");
   const msg = document.getElementById("noMsg");
-  const KEY = RESPUESTA.clave; // solo se usa si momento-si.js no está cargado
-  const ms = () => window.MomentoSi; // se consulta al usarlo (no al cargar), así no importa el orden de los scripts
-
-  // Borra el "sí" guardado en este dispositivo
-  function olvidar() {
-    if (ms() && ms().clear) ms().clear();
-    try { localStorage.removeItem(KEY); } catch (e) {}
-  }
-
-  // Modo prueba (RESPUESTA.modoPrueba en RdelR-data.js) o abrir RdelR.html?reset
-  if (RESPUESTA.modoPrueba || new URLSearchParams(location.search).has("reset")) olvidar();
+  // Fecha fija del "sí" (RESPUESTA.fecha en RdelR-data.js)
+  const FECHA_SI = new Date(RESPUESTA.fecha).getTime();
+  // Modo prueba (RESPUESTA.modoPrueba en RdelR-data.js) o abrir RdelR.html?reset: se vuelve a ver la pregunta
+  const verPregunta = RESPUESTA.modoPrueba || new URLSearchParams(location.search).has("reset");
 
   document.getElementById("qIcon").textContent = PREGUNTA.icono;
   document.getElementById("qIntro").textContent = PREGUNTA.intro;
   document.getElementById("qTitle").textContent = PREGUNTA.titulo;
-
-  function guardado() {
-    if (ms()) { const d = ms().load(); return d ? d.getTime() : null; }
-    try { return Number(localStorage.getItem(KEY)) || null; } catch (e) { return null; }
-  }
 
   // La llama la quinta estrella
   window.abrirPregunta = function () {
@@ -35,12 +23,11 @@
     modal.setAttribute("aria-hidden", "false");
     modalText.hidden = true;
     closeBtn.hidden = true; // no hay cómo cerrarla sin responder
-    const ts = guardado();
-    if (ts) mostrarRespuesta(ts); else question.hidden = false;
+    if (verPregunta) question.hidden = false; else mostrarRespuesta(FECHA_SI);
   };
 
   // ----- "Sí": registra la hora exacta y abre la interfaz final -----
-  const formato = new Intl.DateTimeFormat("es-EC", { dateStyle: "full", timeStyle: "medium" });
+  const formato = new Intl.DateTimeFormat("es-EC", { dateStyle: "full", timeStyle: "medium", timeZone: "America/Guayaquil" });
 
   function mostrarRespuesta(ts) {
     question.hidden = true;
@@ -51,7 +38,8 @@
     document.getElementById("aWords").textContent = RESPUESTA.palabras;
     const cta = document.getElementById("aCta");
     cta.textContent = RESPUESTA.cta;
-    cta.href = RESPUESTA.ctaHref + "?sf=" + ts; // NuestraFecha arranca el contador desde este instante
+    cta.href = RESPUESTA.ctaHref;
+    if (window.Desbloqueos) Desbloqueos.registrar("nuestrafecha"); // queda en "Descubiertas"
     answer.hidden = false;
   }
 
@@ -70,11 +58,7 @@
   }
 
   yes.addEventListener("click", () => {
-    const ts = Date.now();
-    if (ms()) ms().save(new Date(ts));
-    else { try { localStorage.setItem(KEY, String(ts)); } catch (e) {} }
-    if (window.Desbloqueos) Desbloqueos.registrar("nuestrafecha"); // queda en "Descubiertas"
-    mostrarRespuesta(ts);
+    mostrarRespuesta(FECHA_SI);
     lluvia();
   });
 

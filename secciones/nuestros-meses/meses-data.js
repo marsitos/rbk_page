@@ -3,7 +3,7 @@
 // { txt: "texto", img: "foto12.jpg" } → busca la foto en FOLDER. Si no existe, solo muestra el texto.
 // bg = foto de fondo de ese mes (archivo dentro de FOLDER). Déjalo en "" para usar solo el fondo liso.
 // Septiembre y octubre: reemplaza los textos "Escribe aquí..." por recuerdos reales.
-const FOLDER = "../assets/imgnosotros/";
+const FOLDER = "../../assets/imgnosotros/";
 // Opacidad de la foto de fondo (0 = invisible, 1 = totalmente visible). Sube o baja a tu gusto.
 const BG_OPACITY = 0.35;
 const MONTHS = [

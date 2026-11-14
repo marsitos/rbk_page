@@ -33,12 +33,12 @@
 
   const css = document.createElement("link");
   css.rel = "stylesheet";
-  css.href = ruta("../../css/RdelR-escritorio.css");
+  css.href = ruta("../css/RdelR-escritorio.css");
   css.onload = () => {
     document.body.classList.add("fx-desktop");
     const css2 = document.createElement("link");
     css2.rel = "stylesheet";
-    css2.href = ruta("../../css/RdelR-puzzle.css");
+    css2.href = ruta("../css/RdelR-puzzle.css");
     document.head.appendChild(css2);
     cargarScript("RdelR-viaLactea.js")
       .then(() => cargarScript("RdelR-planeta.js"))

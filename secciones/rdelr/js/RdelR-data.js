@@ -43,13 +43,13 @@ const PREGUNTA = {
 // Lo que aparece después de decir que sí
 const RESPUESTA = {
   modoPrueba: false,
-  clave: "respuestaSi",                    // nombre con el que se guarda la hora (NuestraFecha la lee)
+  fecha: "2026-11-13T16:04:43-05:00",      // momento exacto del sí (viernes 13/11/2026, hora de Ecuador)
   eyebrow: "Bechito",
   titulo: "Desde hoy, hasta siempre.",
   etiquetaHora: "Tu sí quedó registrado el",
   palabras: "Desde hoy, esto es nuestro.\nSeis meses para llegar hasta aquí, y todo lo que falta.",
   cta: "Ver nuestra fecha →",
-  ctaHref: "NuestraFecha.html",
+  ctaHref: "../nuestra-fecha/NuestraFecha.html",
   emojis: ["🦋", "🌻", "✦", "💜"]           // lluvia que cae al decir que sí
 };
 

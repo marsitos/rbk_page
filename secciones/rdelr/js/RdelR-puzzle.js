@@ -4,7 +4,7 @@
 // Paso 3: repetir en orden la secuencia de luces; al acertar la última, el planeta se abre y se entra a Interior.html.
 (function () {
   const CONFIG = {
-    destino: "Interior.html",          // página que se abre al completar el puzzle
+    destino: "../interior/interior.html",          // página que se abre al completar el puzzle
     objetivoGrados: -25,               // inclinación de los anillos que "encaja" (paralela a la franja de la Vía Láctea)
     tolerancia: 2.5,                   // margen de error en grados
     segundosCarga: 2.4,                // cuánto hay que mantener el clic

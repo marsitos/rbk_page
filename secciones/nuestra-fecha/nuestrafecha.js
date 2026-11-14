@@ -1,6 +1,6 @@
 // ===== FOTOS DEL CARRUSEL =====
 // Carpeta de las fotos (relativa a este archivo):
-const FOLDER = "../assets/imgnosotros/";
+const FOLDER = "../../assets/imgnosotros/";
 // Las fotos se llaman foto1, foto2, ... foto40. Si agregas más, sube este número.
 const TOTAL = 40;
 // El código prueba estas extensiones para cada foto, así no importa si es .jpg, .jpeg, .png, etc.
@@ -111,20 +111,8 @@ let rt;
 window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(build, 250); });
 
 // ===== CONTADOR =====
-// Ajusta la hora exacta cuando ella diga que sí (mes 10 = noviembre).
-const DEFAULT_START = new Date(2026, 10, 13, 0, 0, 0);
-// El momento exacto del "sí" llega por el enlace (?sf=...) o queda guardado en el dispositivo (RdelR).
-// Si no existe, o es anterior al 13/11/2026 (una prueba), se usa el 13/11/2026 a las 00:00.
-function savedStart() {
-  let raw = new URLSearchParams(location.search).get("sf");
-  const fromUrl = !!raw;
-  if (!raw) { try { raw = localStorage.getItem("respuestaSi"); } catch (e) {} }
-  const ts = Number(raw);
-  if (!ts) return null;//cambiado
-  if (fromUrl) { try { localStorage.setItem("respuestaSi", String(ts)); } catch (e) {} }
-  return new Date(ts);
-}
-const OUR_START = savedStart() || DEFAULT_START;
+// Momento exacto en que dijo que sí: viernes 13/11/2026, 16:04:43 (hora de Ecuador, UTC-5).
+const OUR_START = new Date("2026-11-13T16:04:43-05:00");
 const p2 = n => String(n).padStart(2, "0");
 function tick() {
   const s = Math.max(0, Math.floor((new Date() - OUR_START) / 1000));
